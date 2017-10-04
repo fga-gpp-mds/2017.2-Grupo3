@@ -15,6 +15,9 @@ jobs:
           paths:
             - node_modules
       - run:
+          name: Style
+          command: npm run lint
+      - run:
           name: Test
           command: npm run test
       - deploy:
