@@ -5,6 +5,7 @@
 <p align="center">
 <a href="https://circleci.com/gh/fga-gpp-mds/2017.2-Grupo3"><img src="https://circleci.com/gh/fga-gpp-mds/2017.2-MerendaMais.svg?style=shield&circle-token=:circle-token"></a>
 <a href="https://www.gnu.org/licenses/gpl-3.0.en.html"><img src="https://img.shields.io/aur/license/yaourt.svg" alt="License: GPL"></a>  
+<a href="https://codeclimate.com/github/fga-gpp-mds/2017.2-MerendaMais/test_coverage"><img src="https://api.codeclimate.com/v1/badges/da7b1a4300b6c84c409b/test_coverage" /></a>
 </p>
 
 

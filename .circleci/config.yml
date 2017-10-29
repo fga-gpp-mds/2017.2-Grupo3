@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    environment:
+        CC_TEST_REPORTER_ID: ${CODE_CLIMATE_TOKEN}
     docker:
       - image: circleci/node:6
     steps:
@@ -17,9 +19,14 @@ jobs:
       - run:
           name: Style
           command: npm run lint
+      - run: curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - run: chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build      
       - run:
           name: Test
-          command: npm run test
+          command: npm run test-with-coverage
+      - run: ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info
+      - run: ./cc-test-reporter upload-coverage -r ${CODE_CLIMATE_TOKEN}
       - deploy:
           name: Deploy on Expo
           command: |
