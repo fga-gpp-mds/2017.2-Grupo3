@@ -113,7 +113,7 @@ export default class StockFoodCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusFoodStock(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

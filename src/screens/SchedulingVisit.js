@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View, Picker, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Picker, TouchableOpacity, Alert, ScrollView, Dimensions, BackHandler } from 'react-native';
 import PopupDialog, {
   DialogTitle,
   DialogButton,
 } from 'react-native-popup-dialog';
-import { EvilIcons } from '@expo/vector-icons';
+import { EvilIcons, Ionicons } from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
-import Header from '../components/Header';
 import SchoolData from '../components/SchoolData';
 import InvitedCounselorsData from '../components/InvitedCounselorsData';
 import Button from '../components/Button';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 
@@ -19,9 +20,45 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
+  textLogo: {
+    // Font size 30 looks nice on 360 width phone.
+    // (x * widthYourPhone = fontSize) where x is the proportion used in fontSize above.
+    fontSize: width * 0.08,
+    color: 'white',
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginLeft: 60,
+  },
+  wrapper: {
+    height: 100,
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#FF9500',
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    alignItems: 'center',
+  },
+  schedullingButton: {
+    paddingVertical: 20,
+    borderWidth: 1,
+    borderRadius: 7,
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: '#FF9500',
+    justifyContent: 'flex-end',
+  },
 
-  icon: {
-    marginRight: 15,
+  disabledSchedullingButton: {
+    paddingVertical: 20,
+    borderWidth: 1,
+    borderRadius: 7,
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: '#DEDEDE',
+    justifyContent: 'flex-end',
   },
 
   button: {
@@ -42,7 +79,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginHorizontal: 20,
   },
-
+  icon_header: {
+    marginLeft: 20,
+  },
   Picker: {
     marginHorizontal: 15,
     width: '95%',
@@ -127,12 +166,17 @@ export default class SchedulingVisit extends React.Component {
         agentEmail: '',
         listOfInvitees: this.props.listOfInvitees,
       },
+      verification: true,
     };
   }
 
   componentWillMount() {
     this.props.asyncGetCounselorFromGroup(this.props.counselor.profile.CAE,
       this.props.counselor.profile.cpf);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => Actions.mainScreen());
   }
 
   componentWillReceiveProps(newProps) {
@@ -300,11 +344,17 @@ export default class SchedulingVisit extends React.Component {
   render() {
     return (
       <View style={styles.principal}>
-        <Header
-          title={'AGENDAR'}
-          subTitle={'VISITA'}
-          backButton
-        />
+        <View style={styles.wrapper}>
+          <TouchableOpacity onPress={() => Actions.mainScreen()} >
+            <Ionicons
+              name="ios-arrow-back-outline"
+              style={styles.icon_header}
+              size={45}
+              color="black"
+            />
+          </TouchableOpacity>
+          <Text style={styles.textLogo}>Agendar Visita</Text>
+        </View>
 
         <PopupDialog
           ref={(popupDialogAgent) => { this.popupDialogAgent = popupDialogAgent; }}

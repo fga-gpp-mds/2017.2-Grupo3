@@ -9,11 +9,54 @@ exports[`Testing DocCheckout Screen renders as expected 1`] = `
     }
   }
 >
-  <Header
-    backButton={true}
-    subTitle=""
-    title="Relatórios"
-  />
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#FF9500",
+        "borderBottomColor": "black",
+        "borderBottomWidth": 1,
+        "flexDirection": "row",
+        "height": 100,
+        "paddingBottom": 10,
+        "paddingTop": 10,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      onPress={[Function]}
+    >
+      <Icon
+        allowFontScaling={false}
+        color="black"
+        name="ios-arrow-back-outline"
+        size={45}
+        style={
+          Object {
+            "marginLeft": 20,
+          }
+        }
+      />
+    </TouchableOpacity>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "white",
+          "fontSize": 60,
+          "fontWeight": "bold",
+          "marginLeft": 100,
+          "marginTop": 10,
+        }
+      }
+    >
+      Relatórios
+    </Text>
+  </View>
   <ScrollViewMock>
     <View>
       <View

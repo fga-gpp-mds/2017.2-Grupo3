@@ -124,7 +124,7 @@ export default class FoodQualityCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusFoodQuality(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

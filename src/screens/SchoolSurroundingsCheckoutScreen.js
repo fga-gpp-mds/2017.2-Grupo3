@@ -114,7 +114,7 @@ export default class SchoolSurroundingsCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusSchoolSurroundings(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

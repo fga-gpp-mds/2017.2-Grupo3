@@ -98,7 +98,7 @@ export default class DocCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusDoc(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   showNegativeCheckBox(item) {

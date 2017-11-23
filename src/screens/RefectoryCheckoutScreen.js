@@ -114,7 +114,7 @@ export default class RefectoryCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusRefectory(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

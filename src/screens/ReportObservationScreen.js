@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
 export default class ReportObservationScreen extends React.Component {
   concludeReport() {
     this.props.setStatusReportObservation(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

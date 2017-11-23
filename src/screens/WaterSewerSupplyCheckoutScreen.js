@@ -98,7 +98,7 @@ export default class WaterSewerSupplyCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusWaterSewerSupply(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   showNegativeCheckBox(item) {

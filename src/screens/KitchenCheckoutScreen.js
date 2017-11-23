@@ -98,7 +98,7 @@ export default class KitchenCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusKitchen(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   showNegativeCheckBox(item) {

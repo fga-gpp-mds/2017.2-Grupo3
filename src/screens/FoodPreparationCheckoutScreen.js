@@ -114,7 +114,7 @@ export default class FoodPreparationCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusFoodPreparation(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

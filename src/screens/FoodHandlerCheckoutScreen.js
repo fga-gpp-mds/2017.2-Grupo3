@@ -98,7 +98,7 @@ export default class FoodHandlerCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusFoodHandler(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   showNegativeCheckBox(item) {
