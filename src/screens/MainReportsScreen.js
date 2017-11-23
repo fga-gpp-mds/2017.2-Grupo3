@@ -4,11 +4,15 @@ import { StyleSheet,
   Text,
   View,
   ScrollView,
+  Dimensions,
+  BackHandler,
 } from 'react-native';
 import Checkbox from 'react-native-checkbox';
+import { Ionicons } from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
-import Header from '../components/Header';
 import store from '../Reducers/store';
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
 
@@ -21,6 +25,19 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: '#FF9500',
     justifyContent: 'flex-end',
+  },
+  icon_header: {
+    marginLeft: 20,
+  },
+  wrapper: {
+    height: 100,
+    flexDirection: 'row',
+    paddingTop: 10,
+    paddingBottom: 10,
+    backgroundColor: '#FF9500',
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+    alignItems: 'center',
   },
   buttonPhoto: {
     paddingVertical: 10,
@@ -41,6 +58,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
   },
+  textLogo: {
+    // Font size 30 looks nice on 360 width phone.
+    // (x * widthYourPhone = fontSize) where x is the proportion used in fontSize above.
+    fontSize: width * 0.08,
+    color: 'white',
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginLeft: 100,
+  },
   text: {
     paddingLeft: 20,
     paddingTop: 5,
@@ -58,6 +84,10 @@ export default class MainReportsScreen extends React.Component {
       anyReport: false,
       whatever: '',
     };
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => Actions.mainScreen());
   }
 
   checkingFoodQualityReport() {
@@ -227,10 +257,17 @@ export default class MainReportsScreen extends React.Component {
   render() {
     return (
       <View style={styles.content}>
-        <Header
-          title={'Relatórios'}
-          backButton
-        />
+        <View style={styles.wrapper}>
+          <TouchableOpacity onPress={() => Actions.mainScreen()} >
+            <Ionicons
+              name="ios-arrow-back-outline"
+              style={styles.icon_header}
+              size={45}
+              color="black"
+            />
+          </TouchableOpacity>
+          <Text style={styles.textLogo}>Relatórios</Text>
+        </View>
         <ScrollView>
           <View>
             <View style={{ flexDirection: 'row', paddingTop: 40 }}>
