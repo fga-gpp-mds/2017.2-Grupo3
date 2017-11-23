@@ -10,6 +10,7 @@ import { StyleSheet,
   TextInput,
   Dimensions,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import Header from '../components/Header';
 
@@ -82,6 +83,10 @@ const styles = StyleSheet.create({
 });
 
 export default class SchoolSurroundingsCheckoutScreen extends React.Component {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
+  }
+
   showPositiveCheckBox(item) {
     return (
       <View>
@@ -114,7 +119,7 @@ export default class SchoolSurroundingsCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusSchoolSurroundings(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {

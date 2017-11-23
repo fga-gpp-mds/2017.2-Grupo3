@@ -10,6 +10,7 @@ import { StyleSheet,
   TextInput,
   Dimensions,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import Header from '../components/Header';
 
@@ -81,6 +82,9 @@ const styles = StyleSheet.create({
 });
 
 export default class WaterSewerSupplyCheckoutScreen extends React.Component {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
+  }
   showPositiveCheckBox(item) {
     return (
       <View>

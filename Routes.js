@@ -38,7 +38,6 @@ const Routes = () => ({
         >
           <Scene key="root">
             <Scene key="initialScreen" component={InitialScreen} type="reset" hideNavBar />
-            <Scene key="schedulingVisit" component={SchedulingVisitContainer} hideNavBar />
             <Scene key="manageRegisters" component={ManageRegistersScreenContainer} hideNavBar />
             <Scene key="mainScreen" component={MainScreen} type="reset" hideNavBar />
             <Scene key="searchSchool" component={SearchSchoolContainer} hideNavBar />
@@ -46,7 +45,13 @@ const Routes = () => ({
             <Scene key="loginScreen" component={LoginContainer} hideNavBar />
             <Scene key="profileInfoScreen" component={ProfileInfoScreenContainer} hideNavBar />
             <Scene key="updateInfoScreen" component={UpdateInfoScreenContainer} hideNavBar />
-            <Scene key="mainReportsScreen" component={MainReportsScreen} hideNavBar />
+            <Scene
+              key="schedulingVisit"
+              component={SchedulingVisitContainer}
+              type="reset"
+              hideNavBar
+            />
+            <Scene key="mainReportsScreen" component={MainReportsScreen} type="reset" hideNavBar />
             <Scene key="kitchenCheckoutScreen" component={KitchenCheckoutContainer} hideNavBar />
             <Scene key="DocCheckoutScreen" component={DocCheckoutContainer} hideNavBar />
             <Scene

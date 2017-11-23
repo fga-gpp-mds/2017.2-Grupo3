@@ -10,6 +10,7 @@ import { StyleSheet,
   TextInput,
   Dimensions,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import Header from '../components/Header';
 
@@ -81,6 +82,16 @@ const styles = StyleSheet.create({
 });
 
 export default class DocCheckoutScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      observation: this.props.observation,
+    };
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
+  }
   showPositiveCheckBox(item) {
     return (
       <View>
@@ -96,9 +107,11 @@ export default class DocCheckoutScreen extends React.Component {
     );
   }
 
+
   concludeReport() {
     this.props.setStatusDoc(true);
-    Actions.pop();
+    this.props.setDocObservation(this.state.observation);
+    Actions.mainReportsScreen();
   }
 
   showNegativeCheckBox(item) {

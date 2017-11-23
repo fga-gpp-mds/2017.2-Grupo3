@@ -10,6 +10,7 @@ import { StyleSheet,
   TextInput,
   Dimensions,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import Header from '../components/Header';
 
@@ -92,6 +93,10 @@ const styles = StyleSheet.create({
 });
 
 export default class FoodQualityCheckoutScreen extends React.Component {
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
+  }
+
   showPositiveCheckBox(item) {
     return (
       <View>
@@ -124,7 +129,7 @@ export default class FoodQualityCheckoutScreen extends React.Component {
 
   concludeReport() {
     this.props.setStatusFoodQuality(true);
-    Actions.pop();
+    Actions.mainReportsScreen();
   }
 
   render() {
