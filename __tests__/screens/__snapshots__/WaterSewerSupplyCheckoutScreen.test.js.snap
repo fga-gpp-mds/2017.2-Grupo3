@@ -10,10 +10,10 @@ exports[`Testing FoodQualityCheckout Screen renders as expected 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle="Abastecimento de Água e Esgoto"
-    title="Lista de verificação"
+    title="Relatório"
   />
   <KeyboardAvoidingView
     behavior="padding"

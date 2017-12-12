@@ -8,12 +8,22 @@ import { TouchableOpacity,
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import { FOOD_QUALITY } from '../../constants/generalConstants';
 import Header from '../../components/Header';
 import styles from '../../Styles';
+import { backHandlerPop } from '../../NavigationFunctions';
 
 export default class FoodQualityCheckoutScreen extends React.Component {
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPop);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPop);
+  }
+
   showPositiveCheckBox(item) {
     return (
       <View>
@@ -55,7 +65,6 @@ export default class FoodQualityCheckoutScreen extends React.Component {
         <Header
           title={'Lista de verificação'}
           subTitle={FOOD_QUALITY}
-          backButton
         />
         <KeyboardAvoidingView style={styles.checklist.content} behavior="padding">
           <ScrollView>

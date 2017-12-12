@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { View, ActivityIndicator, ScrollView, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, ScrollView, StyleSheet, BackHandler } from 'react-native';
 import PopupDialog, { DialogTitle, DialogButton } from 'react-native-popup-dialog';
 import VisitCard from '../components/VisitCard';
 import Header from '../components/Header';
@@ -9,6 +9,7 @@ import VisitInfoPopUp from '../components/VisitInfoPopUp';
 import { SCHOOL_ENDPOINT, UNABLE_TO_FIND_SCHOOL } from '../constants/generalConstants';
 import { logInfo, logWarn } from '../../logConfig/loggers';
 import ShowToast from '../components/Toast';
+import { backHandlerPop } from '../NavigationFunctions';
 
 const FILE_NAME = 'VisitInvites';
 
@@ -117,8 +118,15 @@ class VisitInvites extends React.Component {
     invited.
   */
   componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPop);
+
     this.props.asyncGetSchedule(this.props.counselor);
   }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPop);
+  }
+
 
   async getLocalization() {
     try {
@@ -183,7 +191,6 @@ class VisitInvites extends React.Component {
         <Header
           title={'Notificações'}
           subTitle={'Visita'}
-          backButton
         />
         <PopupDialog
           /* Popup para mostrar as informações da visita */

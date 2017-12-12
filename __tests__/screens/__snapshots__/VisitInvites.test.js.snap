@@ -9,8 +9,8 @@ exports[`Testing VisitInvites it renders correctly 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle="Visita"
     title="Notificações"
   />
@@ -133,8 +133,8 @@ exports[`Testing VisitInvites it renders correctly with application loading 1`] 
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle="Visita"
     title="Notificações"
   />

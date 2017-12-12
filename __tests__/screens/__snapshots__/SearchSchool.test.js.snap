@@ -10,8 +10,8 @@ exports[`Testing SearchSchool it renders correctly 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle=""
     title="Pesquisar Escola"
   />
@@ -682,8 +682,8 @@ exports[`Testing SearchSchool register method Testing school list rendering 1`] 
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle=""
     title="Pesquisar Escola"
   />

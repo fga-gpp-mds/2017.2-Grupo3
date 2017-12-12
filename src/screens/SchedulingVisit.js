@@ -5,7 +5,7 @@ import PopupDialog, {
   DialogTitle,
   DialogButton,
 } from 'react-native-popup-dialog';
-import { EvilIcons, Ionicons } from '@expo/vector-icons';
+import { EvilIcons } from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import DatePicker from 'react-native-datepicker';
 import SchoolData from '../components/SchoolData';
@@ -13,6 +13,10 @@ import EmailField from '../components/EmailField';
 import InvitedCounselorsData from '../components/InvitedCounselorsData';
 import Button from '../components/Button';
 import * as constant from '../constants/sendAgentEmail';
+import { backHandlerPopToMain } from '../NavigationFunctions';
+import Header from '../components/Header';
+import ShowToast from '../components/Toast';
+import { NO_OTHER_COUNSELORS } from '../constants/generalConstants';
 
 const { width } = Dimensions.get('window');
 
@@ -198,12 +202,13 @@ export default class SchedulingVisit extends React.Component {
   }
 
   componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPopToMain);
     this.props.asyncGetCounselorFromGroup(this.props.counselor.profile.CAE,
       this.props.counselor.profile.cpf);
   }
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => Actions.mainScreen());
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPopToMain);
   }
 
   invitingAgent() {
@@ -380,22 +385,13 @@ export default class SchedulingVisit extends React.Component {
       ))
     );
   }
-
   render() {
     return (
       <View style={styles.principal}>
-        <View style={styles.wrapper}>
-          <TouchableOpacity onPress={() => Actions.mainScreen()} >
-            <Ionicons
-              name="ios-arrow-back-outline"
-              style={styles.icon_header}
-              size={45}
-              color="black"
-            />
-          </TouchableOpacity>
-          <Text style={styles.textLogo}>Agendar Visita</Text>
-        </View>
-
+        <Header
+          title={'Agendar Visita'}
+          onPress={() => Actions.popTo('mainScreen')}
+        />
         <PopupDialog
           ref={(popupDialogAgent) => { this.popupDialogAgent = popupDialogAgent; }}
           height="45%"
@@ -450,7 +446,7 @@ export default class SchedulingVisit extends React.Component {
             <View style={styles.footerPopUp} key="buttonsDialog">
               <DialogButton
                 buttonStyle={styles.dialogButtonStyle}
-                text="ACEITAR"
+                text="CONVIDAR"
                 onPress={() => this.popupDialogCounselor.dismiss()}
                 key="dialogButton1"
               />
@@ -529,7 +525,11 @@ export default class SchedulingVisit extends React.Component {
                 key="searchCounselorButton"
                 style={styles.button}
                 onPress={() => {
-                  this.popupDialogCounselor.show();
+                  if (this.props.listOfCounselorsInAGroup.length === 0) {
+                    ShowToast.Toast(NO_OTHER_COUNSELORS);
+                  } else {
+                    this.popupDialogCounselor.show();
+                  }
                 }}
               >
                 <Text style={styles.buttonText}>Adicionar Conselheiro</Text>

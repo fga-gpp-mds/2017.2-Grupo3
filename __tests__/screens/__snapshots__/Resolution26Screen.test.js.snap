@@ -11,8 +11,8 @@ exports[`Testing Resolution26Screen renders as expected 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle="Resolução Nº 26"
     title="Legislação"
   />

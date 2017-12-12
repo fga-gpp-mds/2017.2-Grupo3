@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet,
+import {
+  StyleSheet,
   TouchableOpacity,
   Text,
   View,
@@ -14,7 +15,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Actions } from 'react-native-router-flux';
 import { logInfo, logWarn } from '../../../logConfig/loggers';
 import ShowToast from '../../components/Toast';
-import { POSTS_LINK_NUVEM_CIVICA,
+import {
+  POSTS_LINK_NUVEM_CIVICA,
   APP_IDENTIFIER,
   INSPECTION_POSTING_TYPE_CODE,
   FINISH_INSPECTION,
@@ -34,12 +36,14 @@ import { POSTS_LINK_NUVEM_CIVICA,
   WATER_SEWER_SUPPLY,
   KITCHEN,
   FOOD_PREPARATION,
-  OTHER_OBSERVATION } from '../../constants/generalConstants';
+  OTHER_OBSERVATION,
+} from '../../constants/generalConstants';
 import {
   GET_CURRENT_SCHEDULE_ERROR,
   AFTER_INPECTION_POST_ERROR,
   UPDATE_CURRENT_SCHEDULE_ERROR,
-  BEFORE_INPECTION_POST_ERROR } from '../../constants/errorConstants';
+  BEFORE_INPECTION_POST_ERROR,
+} from '../../constants/errorConstants';
 import { convertingJSONToString } from '../../actions/counselorActions';
 import { errorGenerator } from '../../actions/schedulingVisitActions';
 import Header from '../../components/Header';
@@ -170,9 +174,26 @@ const mountDefaultJsonOfInspectionResult = (
   return defaultContentJSON;
 };
 
+// Since this screen has a special navigation logic, we made method here to control it.
+const backNavigation = () => {
+  Alert.alert(
+    'SAIR DA FISCALIZAÇÃO',
+    LEAVING_INSPECTION,
+    [
+      { text: 'Cancelar' },
+      { text: 'Voltar', onPress: () => Actions.popTo('StartPendingInspection') },
+    ],
+  );
+  return true;
+};
+
 export default class MainReportsScreen extends React.Component {
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => Actions.StartPendingInspection());
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backNavigation);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backNavigation);
   }
 
   async addContentsOnInspectionPostInNuvem(codPostagem, contentsListOfInspectionResults) {
@@ -493,15 +514,7 @@ export default class MainReportsScreen extends React.Component {
       <View style={styles.content}>
         <Header
           title={'Listas de verificação'}
-          backButton
-          backTo={() => Alert.alert(
-            'SAIR DA FISCALIZAÇÃO',
-            LEAVING_INSPECTION,
-            [
-              { text: 'Cancelar' },
-              { text: 'Voltar', onPress: () => Actions.StartPendingInspection() },
-            ],
-          )}
+          onPress={() => backNavigation()}
         />
         <ScrollView>
           <View pointerEvents={this.props.clickableView} >

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Router, Scene, Drawer } from 'react-native-router-flux';
-
 import InitialScreen from './src/screens/InitialScreen';
 import LoginContainer from './src/Containers/LoginContainer';
 import ProfileInfoScreenContainer from './src/Containers/ProfileInfoScreenContainer';
@@ -64,7 +63,6 @@ const Routes = () => ({
             <Scene
               key="scheduleMeeting"
               component={ScheduleMeetingContainer}
-              type="reset"
               hideNavBar
             />
             <Scene key="manageRegisters" component={PrincipalManageRegister} hideNavBar />
@@ -82,7 +80,7 @@ const Routes = () => ({
               type="reset"
               hideNavBar
             />
-            <Scene key="mainReportsScreen" component={MainReportsContainer} type="reset" hideNavBar />
+            <Scene key="mainReportsScreen" component={MainReportsContainer} hideNavBar />
             <Scene
               key="ReportObservationScreen"
               component={ReportObservationContainer}

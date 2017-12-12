@@ -10,7 +10,7 @@ exports[`Testing LoginCounselor renders as expected 1`] = `
 >
   <Header
     backButton={false}
-    backTo={[Function]}
+    onPress={[Function]}
     subTitle=""
     title="Merenda +"
   />

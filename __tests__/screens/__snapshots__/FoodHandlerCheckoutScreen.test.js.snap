@@ -10,8 +10,8 @@ exports[`Testing FoodHandlerCheckout Screen renders as expected 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle="Manipuladores de Alimentos"
     title="Lista de verificação"
   />

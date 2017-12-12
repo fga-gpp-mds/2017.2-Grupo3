@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, BackHandler } from 'react-native';
 import { TabViewAnimated, SceneMap, TabBar } from 'react-native-tab-view';
 import Header from '../../components/Header';
 import ManageNotAcceptedRegistersScreenContainer from '../../Containers/manageCounselors/ManageNotAcceptedRegistersScreenContainer';
 import ManageAcceptedRegistersScreenContainer from '../../Containers/manageCounselors/ManageAcceptedRegistersScreenContainer';
+import { backHandlerPopToMain } from '../../NavigationFunctions';
 
 const styles = StyleSheet.create({
   container: {
@@ -24,11 +25,19 @@ export default class Principal extends Component {
     };
   }
 
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPopToMain);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPopToMain);
+  }
+
   handleIndexChange = index => this.setState({ index });
 
   renderFooter = props => <TabBar style={{ backgroundColor: '#FF9500', borderTopWidth: 1, borderBottomColor: 'black' }} tabStyle={{ paddingHorizontal: -0 }} {...props} />;
 
-  renderHeader = props => <Header title={'Gerenciar Registro'} backButton {...props} />
+  renderHeader = props => <Header title={'Gerenciar Registro'} {...props} />
 
   renderScene = SceneMap({
     first: ManageNotAcceptedRegistersScreenContainer,

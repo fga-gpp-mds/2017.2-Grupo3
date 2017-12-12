@@ -1,3 +1,4 @@
+import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import { FontAwesome } from '@expo/vector-icons';
 import React from 'react';
@@ -17,7 +18,6 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { Actions } from 'react-native-router-flux';
 import { logInfo, logWarn } from '../../logConfig/loggers';
 import Header from '../components/Header';
 import ShowToast from '../components/Toast';
@@ -29,6 +29,7 @@ import {
   SCHOOL_ENDPOINT,
   SCHOOL_NOT_FOUND,
   ERROR_FIND_SCHOOL } from '../constants/generalConstants';
+import { backHandlerPopToMain } from '../NavigationFunctions';
 
 
 const FILE_NAME = 'SearchSchool.js';
@@ -138,8 +139,12 @@ class SearchSchool extends React.Component {
     this.validateCity = this.validateCity.bind(this);
   }
 
-  componentDidMount() {
-    BackHandler.addEventListener('hardwareBackPress', () => Actions.pop());
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPopToMain);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPopToMain);
   }
 
   setStateAsync(data) {
@@ -306,7 +311,7 @@ class SearchSchool extends React.Component {
       <View style={styles.searchSchoolScreen}>
         <Header
           title={'Pesquisar Escola'}
-          backButton
+          onPress={() => Actions.popTo('mainScreen')}
         />
         <KeyboardAvoidingView style={styles.content} behavior="padding">
           <ScrollView

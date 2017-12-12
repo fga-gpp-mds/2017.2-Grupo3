@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
+  BackHandler,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import PopupDialog, {
@@ -14,6 +15,7 @@ import PopupDialog, {
 } from 'react-native-popup-dialog';
 import Header from '../components/Header';
 import LocalizationMapButton from '../components/LocalizationMapButton';
+import { backHandlerPop } from '../NavigationFunctions';
 
 const styles = StyleSheet.create({
   principal: {
@@ -115,10 +117,18 @@ class MeetingInvites extends React.Component {
     };
   }
 
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPop);
+  }
+
   componentDidMount() {
     this.props.asyncGetScheduleMeeting(this.props.counselor);
     this.props.asyncGetCounselorFromGroup(this.props.counselor.profile.CAE,
       this.props.counselor.profile.cpf);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPop);
   }
 
   async getMeetingLocalization() {
@@ -240,10 +250,9 @@ class MeetingInvites extends React.Component {
         <Header
           title={'Notificações'}
           subTitle={'Reunião'}
-          backButton
         />
         <PopupDialog
-        /* Popup para mostrar as informações da reunião */
+          /* Popup para mostrar as informações da reunião */
           ref={(popupDialog) => {
             this.popupDialog = popupDialog;
           }}

@@ -79,7 +79,6 @@ export const setlistOfNotCheckedCounselors = notCheckedCounselor => ({
 export const asyncGetCounselorFromGroup = (CAE, CPF) => async (dispatch) => {
   dispatch(resetList());
 
-  console.log(getGroup);
   const codGroup = await getGroup(CAE);
   logInfo(FILE_NAME, 'asyncGetCounselorFromGroup', `Received codGroup: ${codGroup}`);
   // Returns an array of arrays. The 0 element of the array contains all counselor links,

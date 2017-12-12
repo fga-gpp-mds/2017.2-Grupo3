@@ -1,6 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView, ActivityIndicator, TouchableOpacity, Alert } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  ActivityIndicator,
+  TouchableOpacity,
+  Alert,
+  BackHandler,
+} from 'react-native';
 import PropTypes from 'prop-types';
+import { backHandlerPop } from '../../NavigationFunctions';
 
 const styles = StyleSheet.create({
   listRegisters: {
@@ -42,8 +52,16 @@ const styles = StyleSheet.create({
 });
 
 export default class ManageNotAcceptedRegistersScreen extends React.Component {
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPop);
+  }
+
   componentDidMount() {
     this.getCounselorFromGroup();
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPop);
   }
 
   getCounselorFromGroup() {
@@ -65,7 +83,8 @@ export default class ManageNotAcceptedRegistersScreen extends React.Component {
       'Você deseja realmente desassociar esse Conselheiro da Aplicação?',
       [
         { text: 'Cancelar' },
-        { text: 'Desassociar',
+        {
+          text: 'Desassociar',
           onPress: () => {
             this.props.disableCounselor(counselor, codGroup);
             this.getCounselorFromGroup();

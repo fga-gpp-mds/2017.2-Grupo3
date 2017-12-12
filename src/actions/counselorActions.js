@@ -466,10 +466,7 @@ export const asyncEditCounselor = counselorData => async (dispatch) => {
     `counselor data to edit: ${JSON.stringify(counselorData, null, 2)}`);
   try {
     await editAccountData(counselorData);
-    console.log('One');
     await editCounselorProfile(counselorData);
-    console.log('Two');
-    console.log(editCounselorProfile);
     dispatch(setCounselorEdited(counselorData));
   } catch (error) {
     throw error;

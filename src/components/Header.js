@@ -54,13 +54,11 @@ const styles = StyleSheet.create(
 
 const Header = props => (
   <View style={styles.wrapper}>
-    {props.backButton && (
-      <View style={styles.buttonWrapper}>
-        <TouchableOpacity onPress={props.backTo} >
-          <Ionicons name="ios-arrow-back-outline" style={styles.icon} size={45} color="black" />
-        </TouchableOpacity>
-      </View>
-    )}
+    <View style={styles.buttonWrapper}>
+      <TouchableOpacity onPress={props.onPress} >
+        <Ionicons name="ios-arrow-back-outline" style={styles.icon} size={45} color="black" />
+      </TouchableOpacity>
+    </View>
     <View style={styles.textWrapper}>
       <Text style={styles.textLogo}>{props.title}</Text>
       <Text style={styles.textSubTitle}>{props.subTitle}</Text>
@@ -71,15 +69,14 @@ const Header = props => (
 Header.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
-  backButton: PropTypes.boolean,
-  backTo: PropTypes.func,
+  onPress: PropTypes.func,
 };
 
 Header.defaultProps = {
   title: 'Merenda +',
   subTitle: '',
   backButton: false,
-  backTo: () => Actions.pop(),
+  onPress: () => Actions.pop(),
 };
 
 export default Header;

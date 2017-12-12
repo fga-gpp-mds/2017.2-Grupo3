@@ -13,7 +13,7 @@ loggersLevel = 'warn'  ->  Only warn loggers activate
 loggersLevel = 'error'  ->  Only error loggers activate
 loggersLevel = 'none'  ->  All loggers deactive
 */
-export const loggersLevel = 'all -trace';
+export const loggersLevel = 'none';
 
 const App = () => ({
   render() {

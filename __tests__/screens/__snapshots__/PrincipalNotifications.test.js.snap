@@ -11,8 +11,8 @@ exports[`Testing PrincipalNotification rendering PrincipalNotification renders c
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle=""
     title="Notificações"
   />

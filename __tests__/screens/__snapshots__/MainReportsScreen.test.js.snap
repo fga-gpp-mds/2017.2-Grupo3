@@ -10,8 +10,8 @@ exports[`Testing MainReports Screen renders as expected 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle=""
     title="Listas de verificação"
   />

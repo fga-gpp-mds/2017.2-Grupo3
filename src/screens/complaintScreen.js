@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, BackHandler } from 'react-native';
 import Hyperlink from 'react-native-hyperlink';
 import Header from '../components/Header';
 import * as constant from '../constants/publicAgencyInformations';
+import { backHandlerPopToMain } from '../NavigationFunctions';
 
 const styles = StyleSheet.create({
   complaintScreen: {
@@ -41,13 +42,20 @@ const styles = StyleSheet.create({
 
 });
 
-const complaintScreen = () => ({
+class complaintScreen extends React.PureComponent {
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPopToMain);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPopToMain);
+  }
+
   render() {
     return (
       <View style={styles.complaintScreen}>
         <Header
           title={'Denunciar'}
-          backButton
         />
         <ScrollView>
           <View style={styles.textBox}>
@@ -122,7 +130,7 @@ const complaintScreen = () => ({
         </ScrollView>
       </View>
     );
-  },
-});
+  }
+}
 
 export default complaintScreen;

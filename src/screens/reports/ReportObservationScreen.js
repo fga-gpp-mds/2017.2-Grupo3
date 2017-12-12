@@ -7,12 +7,22 @@ import { TouchableOpacity,
   ScrollView,
   TextInput,
   KeyboardAvoidingView,
+  BackHandler,
 } from 'react-native';
 import { OTHER_OBSERVATION } from '../../constants/generalConstants';
 import Header from '../../components/Header';
 import styles from '../../Styles';
+import { backHandlerPop } from '../../NavigationFunctions';
 
 export default class ReportObservationScreen extends React.Component {
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', backHandlerPop);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', backHandlerPop);
+  }
+
   concludeReport() {
     this.props.setStatusReportObservation(true);
     Actions.mainReportsScreen();
@@ -24,7 +34,6 @@ export default class ReportObservationScreen extends React.Component {
         <Header
           title={'Lista de verificação'}
           subTitle={`+ ${OTHER_OBSERVATION}`}
-          backButton
         />
         <KeyboardAvoidingView style={styles.checklist.content} behavior="padding">
           <ScrollView>

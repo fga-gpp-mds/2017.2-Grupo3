@@ -10,8 +10,8 @@ exports[`Testing UpdateInfoScreen renders as expected 1`] = `
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle=""
     title="Editar Informações"
   />
@@ -172,8 +172,8 @@ exports[`Testing UpdateInfoScreen renders as expected with activity Indicator 1`
   }
 >
   <Header
-    backButton={true}
-    backTo={[Function]}
+    backButton={false}
+    onPress={[Function]}
     subTitle=""
     title="Editar Informações"
   />

@@ -29,10 +29,10 @@
 
 2. Acessar o link da aplicação na barra de pesquisa ou ler o QRCode abaixo:
    * Link da Aplicação: 
-```exp://exp.host/@rogerlenke/grupo3```
+```https://expo.io/@rogerlenke/merendamais```
 
    * QRCode: 
-<p align="center"><img src="https://raw.githubusercontent.com/wiki/fga-gpp-mds/2017.2-Grupo3/Imagens/Application_QRCode.jpg"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/wiki/fga-gpp-mds/2017.2-MerendaMais/Imagens/Application_QRCode.PNG"></p>
 
 3. Desfrute, se você for um Conselheiro :wink:;
 
