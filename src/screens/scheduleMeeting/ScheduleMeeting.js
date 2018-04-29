@@ -567,7 +567,7 @@ ScheduleMeeting.propTypes = {
     phone: string.isRequired,
   }).isRequired,
   meetingListOfInvitees: shape({
-    nuvemCode: number.isRequired,
-    confirmed: bool.isRequired,
+    nuvemCode: number,
+    confirmed: bool,
   }).isRequired,
 };

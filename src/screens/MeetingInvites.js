@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
   ActivityIndicator,
   BackHandler,
@@ -17,6 +16,10 @@ import Header from '../components/Header';
 import LocalizationMapButton from '../components/LocalizationMapButton';
 import { backHandlerPop } from '../NavigationFunctions';
 import stylesList from '../Styles/ListStyles';
+import { getCounselorDataWithEmail } from '../services/extractDataCounselor';
+import ScheduleCard from '../components/ScheduleCard';
+import getMeetingData from '../services/extractDataMeeting';
+import Button from '../components/Button';
 
 const styles = StyleSheet.create({
   principal: {
@@ -103,6 +106,25 @@ const styles = StyleSheet.create({
 
 });
 
+const buttonBoxStyle = StyleSheet.create({
+  design: {
+    borderColor: 'black',
+    borderWidth: 0.8,
+    borderRadius: 7,
+    backgroundColor: 'white',
+    padding: 8,
+    justifyContent: 'center',
+    marginRight: 15,
+    marginTop: 5,
+    marginBottom: 5,
+  },
+
+  text: {
+    fontSize: 12,
+    textAlign: 'center',
+  },
+});
+
 class MeetingInvites extends React.Component {
   constructor(props) {
     super(props);
@@ -159,26 +181,20 @@ class MeetingInvites extends React.Component {
     }
     return (
       this.props.listOfScheduleMeetingInAGroup.map(meetingSchedule => (
-        <View style={styles.listScheduleMeeting}>
-          <View style={styles.textBox}>
-            <Text style={styles.text}>
-              <Text style={{ fontWeight: 'bold' }}>Data: </Text>
-              {meetingSchedule.content.date}
-            </Text>
-            <Text style={styles.text}>
-              <Text style={{ fontWeight: 'bold' }}>Horário: </Text>
-              {meetingSchedule.content.time}
-            </Text>
-          </View>
-          <View style={styles.buttonInformation}>
-            <TouchableOpacity
-              onPress={() => this.getInfo(meetingSchedule.content)}
+        <ScheduleCard
+          data={getMeetingData(meetingSchedule.content)}
+          keyProp={meetingSchedule.nuvemCode}
+        >
+          <View style={{ flex: 3 }}>
+            <Button
+              style={buttonBoxStyle}
+              enabled
+              text="+ INFORMAÇÕES"
               key="+MeetingInfo"
-            >
-              <Text style={styles.buttonText}> + INFORMAÇÕES</Text>
-            </TouchableOpacity>
+              onPress={() => this.getInfo(meetingSchedule.content)}
+            />
           </View>
-        </View>
+        </ScheduleCard>
       ))
     );
   }
@@ -216,20 +232,14 @@ class MeetingInvites extends React.Component {
     return (
       this.state.invitees.map(counselor => (
         <View style={styles.listRegisters} key={counselor.nuvemCode}>
-          <View style={styles.textBox}>
-            <Text style={styles.text}>
-              <Text style={{ fontWeight: 'bold' }}>Nome: </Text>
-              {counselor.name}
-            </Text>
-            <Text style={styles.text}>
-              <Text style={{ fontWeight: 'bold' }}>E-mail: </Text>
-              {counselor.email}
-            </Text>
-            <Text style={styles.text}>
-              <Text style={{ fontWeight: 'bold' }}>Telefone: </Text>
-              {counselor.profile.phone}
-            </Text>
-          </View>
+          {
+            getCounselorDataWithEmail(counselor).map(item => (
+              <Text style={styles.text}>
+                <Text style={{ fontWeight: 'bold' }}>{item.label}</Text>
+                {item.value}
+              </Text>
+            ))
+          }
         </View>
       ))
     );
@@ -276,14 +286,14 @@ class MeetingInvites extends React.Component {
           <ScrollView>
             <View style={styles.listScheduleMeeting}>
               <View style={styles.textBox}>
-                <Text style={styles.text}>
-                  <Text style={{ fontWeight: 'bold' }}>Data: </Text>
-                  {this.state.meetingSchedule.date}
-                </Text>
-                <Text style={styles.text}>
-                  <Text style={{ fontWeight: 'bold' }}>Horário: </Text>
-                  {this.state.meetingSchedule.time}
-                </Text>
+                {
+                  getMeetingData(this.state.meetingSchedule).map(item => (
+                    <Text style={styles.text}>
+                      <Text style={{ fontWeight: 'bold' }}>{item.label} </Text>
+                      {item.value}
+                    </Text>
+                  ))
+                }
                 {this.verificationDescription()}
                 <Text style={styles.text}>
                   <Text style={{ fontWeight: 'bold' }}>Número de convidados: </Text>

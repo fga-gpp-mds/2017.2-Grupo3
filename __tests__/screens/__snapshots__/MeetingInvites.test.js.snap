@@ -101,7 +101,8 @@ exports[`Testing MeetingInvites renders meeting as expected 1`] = `
                 }
               }
             >
-              Data: 
+              Data:
+               
             </Text>
           </Text>
           <Text
@@ -127,7 +128,8 @@ exports[`Testing MeetingInvites renders meeting as expected 1`] = `
                 }
               }
             >
-              Horário: 
+              Horário:
+               
             </Text>
           </Text>
           <Text
@@ -212,123 +214,54 @@ exports[`Testing MeetingInvites renders meeting as expected 1`] = `
       }
     }
   >
-    <View
-      style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "#FAFAFA",
-          "borderColor": "black",
-          "borderRadius": 3,
-          "borderWidth": 1,
-          "flex": 1,
-          "flexDirection": "row",
-          "justifyContent": "space-between",
-          "marginHorizontal": 15,
-          "marginVertical": 10,
-        }
+    <ScheduleCard
+      data={
+        Array [
+          Object {
+            "label": "Data:",
+            "value": "13-06-2019",
+          },
+          Object {
+            "label": "Horário:",
+            "value": "21:56",
+          },
+        ]
       }
     >
       <View
         style={
           Object {
-            "justifyContent": "flex-start",
-            "marginTop": 5,
-            "paddingLeft": 4,
+            "flex": 3,
           }
         }
       >
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          disabled={false}
-          ellipsizeMode="tail"
-          style={
-            Object {
-              "fontSize": 15,
-              "paddingVertical": 2,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "fontWeight": "bold",
-              }
-            }
-          >
-            Data: 
-          </Text>
-          13-06-2019
-        </Text>
-        <Text
-          accessible={true}
-          allowFontScaling={true}
-          disabled={false}
-          ellipsizeMode="tail"
-          style={
-            Object {
-              "fontSize": 15,
-              "paddingVertical": 2,
-            }
-          }
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "fontWeight": "bold",
-              }
-            }
-          >
-            Horário: 
-          </Text>
-          21:56
-        </Text>
-      </View>
-      <View
-        style={
-          Object {
-            "backgroundColor": "white",
-            "borderColor": "black",
-            "borderRadius": 7,
-            "borderWidth": 0.8,
-            "justifyContent": "center",
-            "marginRight": 20,
-            "marginTop": 5,
-            "padding": 8,
-            "width": 120,
-          }
-        }
-      >
-        <TouchableOpacity
-          activeOpacity={0.2}
+        <Button
+          enabled={true}
           key="+MeetingInfo"
           onPress={[Function]}
-        >
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            disabled={false}
-            ellipsizeMode="tail"
-            style={
-              Object {
+          style={
+            Object {
+              "design": Object {
+                "backgroundColor": "white",
+                "borderColor": "black",
+                "borderRadius": 7,
+                "borderWidth": 0.8,
+                "justifyContent": "center",
+                "marginBottom": 5,
+                "marginRight": 15,
+                "marginTop": 5,
+                "padding": 8,
+              },
+              "text": Object {
                 "fontSize": 12,
                 "textAlign": "center",
-              }
+              },
             }
-          >
-             + INFORMAÇÕES
-          </Text>
-        </TouchableOpacity>
+          }
+          text="+ INFORMAÇÕES"
+        />
       </View>
-    </View>
+    </ScheduleCard>
   </ScrollViewMock>
 </View>
 `;

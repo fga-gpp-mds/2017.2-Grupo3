@@ -38,8 +38,8 @@ describe('Testing ProfileInfoScreen', () => {
     };
     const wrapper = shallow(<ProfileInfoScreen {...myProps} />);
 
-    const foundPresident = wrapper.findWhere(c => c.key() === 'is_president');
-    const foundConselour = wrapper.findWhere(c => c.key() === 'is_counselor');
+    const foundPresident = wrapper.findWhere(c => c.text() === 'Presidente');
+    const foundConselour = wrapper.findWhere(c => c.text() === 'Conselheiro');
 
     expect(foundPresident.length).toBe(1);
     expect(foundConselour.length).toBe(0);
@@ -57,8 +57,8 @@ describe('Testing ProfileInfoScreen', () => {
     };
     const wrapper = shallow(<ProfileInfoScreen {...myProps} />);
 
-    const foundPresident = wrapper.findWhere(c => c.key() === 'is_president');
-    const foundConselour = wrapper.findWhere(c => c.key() === 'is_counselor');
+    const foundPresident = wrapper.findWhere(c => c.text() === 'Presidente');
+    const foundConselour = wrapper.findWhere(c => c.text() === 'Conselheiro');
 
     expect(foundPresident.length).toBe(0);
     expect(foundConselour.length).toBe(1);
