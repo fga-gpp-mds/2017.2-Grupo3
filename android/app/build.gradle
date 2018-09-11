@@ -94,9 +94,9 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.merendamais.merendamais"
+        applicationId "com.merendamais"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 25
         versionCode 34
         versionName "1.6"
         ndk {
