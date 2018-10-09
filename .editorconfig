@@ -1,0 +1,11 @@
+# this file makes all editors 'behave' in the same way if they have
+# editorconfig plugin enabled
+
+[*]
+root = true
+charset = utf-8
+tab_width = 2
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true

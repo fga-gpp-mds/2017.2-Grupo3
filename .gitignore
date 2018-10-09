@@ -12,3 +12,6 @@ android/build/
 android/.gradle/
 android/app/build/
 
+android/.gradle/2.14.1/taskArtifacts/
+android/.gradle/2.14.1/task/
+android/.gradle/*

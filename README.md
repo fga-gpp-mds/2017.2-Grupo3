@@ -1,3 +1,4 @@
+
 <h1 align="center">Merenda+</h1>
 
 <p align="center"><img src="https://raw.githubusercontent.com/wiki/fga-gpp-mds/2017.2-Grupo3/Imagens/Malu_Merenda.jpg" width="350px"></p>
@@ -74,29 +75,41 @@
 
 * Para subir o ambiente do projeto:
 
- ```Docker-compose up```
+```bash
+$ sudo docker-compose up
+```
 
 * Para parar o docker de rodar:
 
- ```Ctrl+c```
+```
+Ctrl+c
+```
 
-<p align="justify">Caso deseje instalar alguma dependência no package.json ou acessar o container via bash, rode os seguintes comandos no terminal, depois de ter seguido o passo anterior:</p>
+<p align="justify">Caso deseje instalar alguma dependência no package.json ou acessar o container via bash:</p>
 
-* Para iniciar o container:
+* Para iniciar o container (caso você não tenha rodado o comando `docker-compose up`):
 
- ```docker start 20172merendamais_merenda_mais_1```
+```bash
+$ sudo docker-compose run merenda-merenda /bin/bash
+```
 
 * Para executar o docker via bash:
 
- ```docker exec -it 20172merendamais_merenda_mais_1 bash```
+```bash
+$ sudo docker-compose exec merenda-merenda /bin/bash
+```
 
-* Para sair do bash do container:
+Ambos os comandos acima devem exibir o root do container,  como demonstrado abaixo:
 
- ```Ctrl+d```
+```
+root@<nome da sua máquina>:/code#
+```
 
-* Para parar a execução do container:
+Para sair do bash do container e encerrar a sessão,  digite `Ctrl+d`.
 
- ```docker stop 20172merendamais_merenda_mais_1```
+#### Ajuda com o ambiente docker
+
+Caso esteja com algum problema com o ambiente do docker, [aqui](docker_troubleshooting.md) temos algumas soluções para os problemas conhecidos. Se por acaso seu problema não for solucionado, abra uma [issue](https://github.com/fga-eps-mds/2017.2-MerendaMais/issues/new?labels=bug) para que possamos ajudar.
 
 
 ### Principais funcionalidades

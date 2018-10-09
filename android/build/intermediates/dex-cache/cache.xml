@@ -192,6 +192,15 @@
     </item>
     <item
         is-multidex="false"
+        jar="/code/android/app/build/intermediates/exploded-aar/MerendaMais/react-native-html-to-pdf/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fbde4c67f8a8e9861d97078cf9fb6b0570839188">
+        <dex dex="/code/android/app/build/intermediates/pre-dexed/debug/MerendaMais-react-native-html-to-pdf-unspecified_25567429be2386dd7167b1bfd7cda57e60cad591.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/code/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.0.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -232,7 +241,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="1d76ff99cb8f0d2b13e7d278c86596a0059439c7">
+        sha1="8768eb6bccba561898490d7f419ed5c494644d47">
         <dex dex="/code/android/app/build/intermediates/pre-dexed/debug/MerendaMais-react-native-maps-unspecified_2c9d812e52e8d75ecefa311d4b2e49a3bd924c4f.jar" />
     </item>
     <item
