@@ -7,14 +7,16 @@ import * as actions from '../../src/actions/ManagerRegisterActions';
 import * as types from '../../src/actions/types';
 import {
   COUNSELOR_DISABLED_SUCCESS,
-  DEFAULT_USER_LINK_NUVEM_CIVICA,
   COUNSELOR_DISABLED_FAILED,
-  APP_IDENTIFIER,
-  AUTHENTICATE_LINK_NUVEM_CIVICA,
-  DEFAULT_GROUP_LINK_NUVEM_CIVICA,
   COUNSELOR_GROUP_DISABLED_SUCCESS,
   COUNSELOR_GROUP_DISABLED_FAILED,
-} from '../../src/constants/generalConstants';
+} from '../../src/constants/toastMessages';
+import {
+  AUTHENTICATE_LINK_NUVEM_CIVICA,
+  DEFAULT_USER_LINK_NUVEM_CIVICA,
+  DEFAULT_GROUP_LINK_NUVEM_CIVICA,
+} from '../../src/constants/linkConstants';
+import { APP_IDENTIFIER } from '../../src/constants/codeNumbers';
 
 
 const middlewares = [thunk];

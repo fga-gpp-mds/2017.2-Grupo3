@@ -12,10 +12,12 @@ import {
   SET_CURRENT_INSPECTION,
 } from './types';
 import {
-  APP_IDENTIFIER,
   POSTS_LINK_NUVEM_CIVICA,
+} from '../constants/linkConstants';
+import {
+  APP_IDENTIFIER,
   VISIT_POSTING_TYPE_CODE,
-} from '../constants/generalConstants';
+} from '../constants/codeNumbers';
 import {
   setPendingScheduleList,
   setExpiredScheduleList,
@@ -33,8 +35,7 @@ import treatingError from './errorUtils';
 
 const FILE_NAME = 'schedulingVisitActions.js';
 
-export const errorGenerator = (name, status) =>
-  new Error(`{ "name": "${name}", "status": ${JSON.stringify(status)} }`);
+export const errorGenerator = (name, status) => new Error(`{ "name": "${name}", "status": ${JSON.stringify(status)} }`);
 
 export const setCurrentInspection = visitSchedule => ({
   type: SET_CURRENT_INSPECTION,
@@ -55,12 +56,12 @@ const verifyDate = (visitSchedule) => {
 
   if (yearSchedule < systemYear) {
     return true;
-  } else if (yearSchedule > systemYear) {
+  } if (yearSchedule > systemYear) {
     return false;
   }
   if (monthSchedule < systemMonth) {
     return true;
-  } else if (monthSchedule > systemMonth) {
+  } if (monthSchedule > systemMonth) {
     return false;
   }
   if (daySchedule < systemDay) {
@@ -163,8 +164,7 @@ export const asyncGetSchedule = counselor => async (dispatch) => {
   };
 
   try {
-    const visitSchedulePostList =
-      await visitScheduleActionsAuxiliary.getVisitSchedulePostList(getScheduleParamsAndHeader);
+    const visitSchedulePostList = await visitScheduleActionsAuxiliary.getVisitSchedulePostList(getScheduleParamsAndHeader);
 
     const visitScheduleContentList = [];
     // Get the content for each visit schedule post in list and organize then.
@@ -173,7 +173,8 @@ export const asyncGetSchedule = counselor => async (dispatch) => {
         visitScheduleActionsAuxiliary.getVisitScheduleContent(
           visitSchedulePostList.data[i].conteudos[0].links[0].href,
           counselor,
-          dispatch),
+          dispatch,
+        ),
       );
     }
 
@@ -250,7 +251,8 @@ const schedulingVisit = (visitData, counselor) => {
         [
           { text: 'Ok', onPress: () => Actions.mainScreen(), style: 'cancel' },
         ],
-        { cancelable: false });
+        { cancelable: false },
+      );
     })
     .catch((error) => {
       treatingError(error);
@@ -296,7 +298,8 @@ export const asyncUpdateSchedule = postData => async (dispatch) => {
     const response = await axios.put(
       `${POSTS_LINK_NUVEM_CIVICA}/${postData.codPostagem}/conteudos/${postData.codConteudoPost}`,
       putScheduleBody,
-      putScheduleHeader);
+      putScheduleHeader,
+    );
     logInfo(FILE_NAME, 'asyncUpdateSchedule', response.data);
   } catch (error) {
     treatingError(error);

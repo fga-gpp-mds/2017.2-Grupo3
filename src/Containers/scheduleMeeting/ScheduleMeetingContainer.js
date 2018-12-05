@@ -18,8 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
   asyncSchedulingMeeting: meetingData => dispatch(asyncSchedulingMeeting(meetingData)),
 
-  setMeetingNewLists: meetingNewListWithInformations =>
-    dispatch(setMeetingNewLists(meetingNewListWithInformations)),
+  setMeetingNewLists: meetingNewListWithInformations => dispatch(setMeetingNewLists(meetingNewListWithInformations)),
 });
 
 const ScheduleMeetingContainer = connect(mapStateToProps, mapDispatchToProps)(ScheduleMeeting);

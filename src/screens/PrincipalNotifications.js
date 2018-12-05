@@ -1,28 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, BackHandler } from 'react-native';
+import {
+  Text, View, TouchableOpacity, BackHandler,
+} from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import Header from '../components/Header';
 import { backHandlerPopToMain } from '../NavigationFunctions';
-
-const styles = StyleSheet.create({
-  principal: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'white',
-  },
-
-  button: {
-    width: 320,
-    height: 65,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FF9500',
-    borderRadius: 10,
-    borderColor: 'black',
-    borderWidth: 1,
-    marginBottom: 60,
-  },
-});
+import styles from '../Styles/PrincipalNotificationsStyles';
 
 class PrincipalNotifications extends React.PureComponent {
   componentWillMount() {
@@ -37,7 +20,7 @@ class PrincipalNotifications extends React.PureComponent {
     return (
       <View style={styles.principal}>
         <Header
-          title={'Notificações'}
+          title="Notificações"
           onPress={() => Actions.popTo('mainScreen')}
         />
         <View style={{ flex: 1, marginTop: 160 }}>

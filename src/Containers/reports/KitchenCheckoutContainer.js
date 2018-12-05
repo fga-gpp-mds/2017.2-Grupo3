@@ -4,7 +4,8 @@ import {
   setKitchenReportPositive,
   setKitchenReportNegative,
   setKitchenObservation,
-  setStatusKitchen } from '../../actions/reportActions';
+  setStatusKitchen,
+} from '../../actions/reportActions';
 
 const mapStateToProps = state => ({
   report: state.report.kitchen,
@@ -18,7 +19,6 @@ const mapDispatchToProps = dispatch => ({
   setStatusKitchen: statusKitchen => dispatch(setStatusKitchen(statusKitchen)),
 });
 
-const kitchenCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(KitchenCheckoutScreen);
+const kitchenCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(KitchenCheckoutScreen);
 
 export default kitchenCheckoutContainer;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Text,
-  StyleSheet,
   ScrollView,
   View,
   TouchableOpacity,
@@ -16,17 +15,19 @@ import { Actions } from 'react-native-router-flux';
 import Header from '../components/Header';
 import {
   REGISTER_FAIL_TITLE,
+} from '../constants/alertTitlesMessages';
+import {
+  EXECUTIVE_POWER,
+  EDUCATION_WORKERS,
+  STUDENT_PARENTS,
+  CIVILIAN_ENTITIES,
   TITULAR_COUNSELOR,
   SURROGATE_COUNSELOR,
   MUNICIPAL_COUNSELOR_CAE,
   STATE_COUNSELOR_CAE,
   PRESIDENT_COUNSELOR,
   COMMON_COUNSELOR,
-  EXECUTIVE_POWER,
-  EDUCATION_WORKERS,
-  STUDENT_PARENTS,
-  CIVILIAN_ENTITIES,
-} from '../constants/generalConstants';
+} from '../constants/counselorConstants';
 import { logInfo } from '../../logConfig/loggers';
 import brazilianStates from '../constants/brazilianStates';
 import CpfField from '../components/CpfField';
@@ -38,73 +39,9 @@ import DropdownComponent from '../components/DropdownComponent';
 import MunicipalDistrict from '../components/MunicipalDistrict';
 import ButtonWithActivityIndicator from '../components/ButtonWithActivityIndicator';
 import { backHandlerPop } from '../NavigationFunctions';
+import styles from '../Styles/RegisterStyles';
 
 const FILE_NAME = 'RegisterScreen.js';
-
-const styles = StyleSheet.create({
-
-  principal: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-
-  content: {
-    flex: 6,
-    marginTop: 8,
-  },
-
-  footer: {
-    flex: 0.08,
-    borderTopColor: '#a9a9a9',
-    borderTopWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  icon: {
-    marginRight: 6,
-  },
-
-  InputFieldStyle: {
-    padding: 8,
-    marginTop: 1,
-    backgroundColor: '#FAFAFA',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRadius: 7,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-  },
-
-  InputFieldDropdown: {
-    marginTop: 1,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 7,
-    marginBottom: 10,
-  },
-
-  InputStyle: {
-    flex: 1,
-  },
-
-  buttonContainer: {
-    paddingVertical: 14,
-    marginVertical: 20,
-    borderRadius: 8,
-    borderWidth: 1,
-    alignItems: 'center',
-    backgroundColor: '#FF9500',
-  },
-
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-  },
-
-});
 
 const UfInitials = (CAE_UF) => {
   if (CAE_UF !== '') {
@@ -134,6 +71,7 @@ export default class RegisterScreen extends React.Component {
         CAE_UF: '',
         CAE_municipalDistrict: '',
         CAE: '',
+        valid: false,
       },
       passwordCompared: '',
     };
@@ -152,51 +90,16 @@ export default class RegisterScreen extends React.Component {
 
   // Verify if there's a error in some field form.
   register() {
-    const cpfRegex = /[0-9]{11}/g;
-    const nameRegex = /[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]/g;
-    const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    const passwordRegex = /^(?=.{6,})(?!.*\s).*$/g;
     const phoneRegex1 = /[0-9]{11}/g;
     const phoneRegex2 = /[0-9]{10}/g;
 
     let error = false;
     let errorMessage = '';
 
-    // Validating CPF.
-    if (!cpfRegex.test(this.state.profile.cpf)) {
-      error = true;
-      errorMessage += 'CPF inválido.\n';
-    }
-
-    // Validating Name.
-    if (!nameRegex.test(this.state.name) || this.state.name.trim() === '') {
-      error = true;
-      errorMessage += 'Nome inválido.\n';
-    }
-
-    // Validating Password.
-    if (!passwordRegex.test(this.state.password)) {
-      error = true;
-      errorMessage += 'Senha Inválida (*Não deve ter espaços *Tamanho mínimo 6 caracteres).\n';
-    }
-
     // Validating Match Password
     if (this.state.password !== this.state.passwordCompared) {
       error = true;
       errorMessage += 'Senhas digitadas devem ser iguais.\n';
-    }
-
-    // Validating Email.
-    if (!emailRegex.test(this.state.email)) {
-      error = true;
-      errorMessage += 'Email inválido.\n';
-    }
-
-    // Validating Phone.
-    if (!phoneRegex1.test(this.state.profile.phone) &&
-      !phoneRegex2.test(this.state.profile.phone)) {
-      error = true;
-      errorMessage += 'Telefone inválido.\n';
     }
 
     // Validating is President.
@@ -236,10 +139,10 @@ export default class RegisterScreen extends React.Component {
     }
 
     // Checking if was found a irregularity in register fields.
-    if (error === false) {
+    if (this.state.profile.valid) {
       this.props.asyncRegisterCounselor(this.state);
     } else {
-      Alert.alert(REGISTER_FAIL_TITLE, errorMessage);
+      Alert.alert(REGISTER_FAIL_TITLE, `Existem campos inválidos! \n${errorMessage}`);
     }
   }
 
@@ -257,28 +160,26 @@ export default class RegisterScreen extends React.Component {
               <Text>CPF</Text>
               <CpfField
                 value={this.state.profile.cpf}
-                callback={validCpf =>
-                  this.setState({ profile: { ...this.state.profile, cpf: validCpf } })}
+                callback={(validCpf, valid) => this.setState({ profile: { ...this.state.profile, cpf: validCpf, valid } })}
               />
 
-              <Text>Nome</Text>
               <NameField
                 value={this.state.name}
-                callback={validName => this.setState({ name: validName })}
+                nameValidated={validName => this.setState({ name: validName })}
               />
 
               <Text>Email</Text>
 
               <EmailField
                 value={this.state.email}
-                callback={validEmail => this.setState({ email: validEmail })}
+                callback={(validEmail, valid) => this.setState({ email: validEmail, valid })}
                 placeholder="Digite o seu email"
                 size={26}
               />
 
               <Text>Senha</Text>
               <PasswordField
-                callback={validPassword => this.setState({ password: validPassword })}
+                callback={(validPassword, valid) => this.setState({ password: validPassword, valid })}
                 password={this.state.password}
                 placeholder="Digite sua senha"
                 isPassword
@@ -295,21 +196,19 @@ export default class RegisterScreen extends React.Component {
                 size={26}
               />
 
-              <Text>Telefone</Text>
               <PhoneField
                 value={this.state.profile.phone}
-                callback={validPhone =>
-                  this.setState({ profile: { ...this.state.profile, phone: validPhone } })}
+                phoneValidated={validPhone => this.setState({ profile: { ...this.state.profile, phone: validPhone } })}
               />
 
 
               <Text>Cargo</Text>
               <DropdownComponent
+                fieldName="Cargo"
                 selectedValue={this.state.profile.isPresident}
-                callback={isPresidentChecked =>
-                  this.setState(
-                    { profile: { ...this.state.profile, isPresident: isPresidentChecked } },
-                  )}
+                callback={(isPresidentChecked, valid) => this.setState(
+                  { profile: { ...this.state.profile, isPresident: isPresidentChecked, valid } },
+                )}
                 pickerTitle={[
                   <Picker.Item value="" label="Escolha seu cargo" color="#95a5a6" />,
                 ]}
@@ -321,9 +220,10 @@ export default class RegisterScreen extends React.Component {
 
               <Text>Tipo de Conselheiro</Text>
               <DropdownComponent
+                fieldName="Tipo de Conselheiro"
                 selectedValue={this.state.profile.counselorType}
-                callback={counselorTypeChecked => this.setState(
-                  { profile: { ...this.state.profile, counselorType: counselorTypeChecked } },
+                callback={(counselorTypeChecked, valid) => this.setState(
+                  { profile: { ...this.state.profile, counselorType: counselorTypeChecked, valid } },
                 )}
                 pickerTitle={[
                   <Picker.Item value="" label="Escolha seu cargo" color="#95a5a6" />,
@@ -337,11 +237,13 @@ export default class RegisterScreen extends React.Component {
 
               <Text>Segmento</Text>
               <DropdownComponent
+                fieldName="Segmento"
                 selectedValue={this.state.profile.segment}
-                callback={segmentChecked => this.setState({
+                callback={(segmentChecked, valid) => this.setState({
                   profile: {
                     ...this.state.profile,
                     segment: segmentChecked,
+                    valid,
                   },
                 })}
                 pickerTitle={[
@@ -357,23 +259,26 @@ export default class RegisterScreen extends React.Component {
 
               <Text>Tipo do CAE</Text>
               <DropdownComponent
+                fieldName="Tipo do CAE"
                 selectedValue={this.state.profile.CAE_Type}
-                callback={caeType => (
-                  caeType === STATE_COUNSELOR_CAE ?
-                    this.setState({
+                callback={(caeType, valid) => (
+                  caeType === STATE_COUNSELOR_CAE
+                    ? this.setState({
                       profile: {
                         ...this.state.profile,
                         CAE_Type: caeType,
                         CAE_municipalDistrict: '',
                         CAE: `${UfInitials(this.state.profile.CAE_UF)}`.trim(),
+                        valid,
                       },
                     })
-                    :
-                    this.setState({
+                    : this.setState({
                       profile: {
                         ...this.state.profile,
                         CAE_Type: caeType,
-                        CAE: `${this.state.profile.CAE_municipalDistrict} ${UfInitials(this.state.profile.CAE_UF)}`.trim(),
+                        CAE: `${this.state.profile.CAE_municipalDistrict} ${UfInitials(this.state.profile.CAE_UF),
+                        valid
+                        }`.trim(),
                       },
                     })
                 )}
@@ -388,13 +293,15 @@ export default class RegisterScreen extends React.Component {
 
               <Text>UF do CAE</Text>
               <DropdownComponent
+                fieldName="CAE"
                 selectedValue={this.state.profile.CAE_UF}
-                callback={checkedUf => this.setState({
+                callback={(checkedUf, valid) => this.setState({
                   profile: {
                     ...this.state.profile,
                     CAE_UF: checkedUf,
                     CAE_municipalDistrict: '',
                     CAE: `${this.state.profile.CAE_municipalDistrict} ${checkedUf.substr(0, 2)}`.trim(),
+                    valid,
                   },
                 })}
                 pickerTitle={[
@@ -402,7 +309,8 @@ export default class RegisterScreen extends React.Component {
                 ]}
                 pickerBody={
                   brazilianStates.estados.map(
-                    item => (<Picker.Item label={item} value={item} color="#000000" />))}
+                    item => (<Picker.Item label={item} value={item} color="#000000" />),
+                  )}
               />
 
               {this.state.profile.CAE_Type === MUNICIPAL_COUNSELOR_CAE && this.state.profile.CAE_UF !== '' && (
@@ -422,7 +330,9 @@ export default class RegisterScreen extends React.Component {
               <Text>CAE</Text>
               <View style={[styles.InputFieldStyle, { justifyContent: 'center' }]}>
                 <Text>
-                  {this.state.profile.CAE_municipalDistrict} {UfInitials(this.state.profile.CAE_UF)}
+                  {this.state.profile.CAE_municipalDistrict}
+                  {' '}
+                  {UfInitials(this.state.profile.CAE_UF)}
                 </Text>
               </View>
 
@@ -448,7 +358,8 @@ export default class RegisterScreen extends React.Component {
             activeOpacity={0.6}
             onPress={() => Actions.loginScreen()}
           >
-            <Text>Já tem um cadastro?
+            <Text>
+Já tem um cadastro?
               <Text style={{ color: 'blue' }}> Entrar</Text>
             </Text>
           </TouchableOpacity>

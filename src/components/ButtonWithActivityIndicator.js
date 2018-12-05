@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import {
+  Text, View, TouchableOpacity, ActivityIndicator,
+} from 'react-native';
 import styles from '../Styles/GeneralStyles';
 
 const ButtonWithActivityIndicator = props => (
@@ -11,8 +13,8 @@ const ButtonWithActivityIndicator = props => (
         size="large"
         color="#FF9500"
       />
-    ) :
-      (
+    )
+      : (
         <TouchableOpacity
           onPress={() => props.onPress()}
           style={props.buttonStyle}

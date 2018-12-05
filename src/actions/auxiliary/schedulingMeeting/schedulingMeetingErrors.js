@@ -1,5 +1,5 @@
 import { logWarn } from '../../../../logConfig/loggers';
-import { INTERNAL_ERROR } from '../../../constants/generalConstants';
+import { INTERNAL_ERROR } from '../../../constants/toastMessages';
 import ShowToast from '../../../components/Toast';
 import { FILE_NAME } from '../../schedulingMeetingActions';
 

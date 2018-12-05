@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
@@ -20,110 +19,7 @@ import { getCounselorDataWithEmail } from '../services/extractDataCounselor';
 import ScheduleCard from '../components/ScheduleCard';
 import getMeetingData from '../services/extractDataMeeting';
 import Button from '../components/Button';
-
-const styles = StyleSheet.create({
-  principal: {
-    flex: 1,
-  },
-
-  content: {
-    flex: 1,
-    paddingTop: 6,
-    backgroundColor: 'white',
-  },
-
-  listScheduleMeeting: {
-    flex: 1,
-    marginHorizontal: 15,
-    marginVertical: 10,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 3,
-    backgroundColor: '#FAFAFA',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  textBox: {
-    marginTop: 5,
-    paddingLeft: 4,
-    justifyContent: 'flex-start',
-  },
-
-  text: {
-    fontSize: 15,
-    paddingVertical: 2,
-  },
-
-  buttonInformation: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: 'white',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 20,
-    marginTop: 5,
-    width: 120,
-  },
-
-  buttonText: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-
-  footerPopUp: {
-    backgroundColor: '#F9F9FB',
-    borderColor: '#DAD9DC',
-    borderTopWidth: 0.5,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  listRegisters: {
-    marginHorizontal: 10,
-    marginVertical: 5,
-    borderColor: 'black',
-    borderWidth: 1.5,
-    borderRadius: 7,
-    backgroundColor: '#FAFAFA',
-    justifyContent: 'space-between',
-  },
-  buttonMap: {
-    paddingVertical: 10,
-    borderWidth: 1,
-    borderRadius: 7,
-    marginHorizontal: 15,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: '#FF9500',
-    justifyContent: 'flex-end',
-  },
-
-});
-
-const buttonBoxStyle = StyleSheet.create({
-  design: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: 'white',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-
-  text: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-});
+import { styles, buttonBoxStyle } from '../Styles/MeetingInvitesStyles';
 
 class MeetingInvites extends React.Component {
   constructor(props) {
@@ -172,7 +68,7 @@ class MeetingInvites extends React.Component {
       return (
         <ActivityIndicator style={{ marginTop: 50 }} size="large" color="#FF9500" />
       );
-    } else if (this.props.listOfScheduleMeetingInAGroup.length === 0) {
+    } if (this.props.listOfScheduleMeetingInAGroup.length === 0) {
       return (
         <View style={stylesList.noneScheduleTextBox}>
           <Text style={stylesList.noneScheduleText}>Nenhuma Reunião Pendente!</Text>
@@ -260,8 +156,8 @@ class MeetingInvites extends React.Component {
     return (
       <View style={styles.principal}>
         <Header
-          title={'Notificações'}
-          subTitle={'Reunião'}
+          title="Notificações"
+          subTitle="Reunião"
         />
         <PopupDialog
           /* Popup para mostrar as informações da reunião */
@@ -289,7 +185,10 @@ class MeetingInvites extends React.Component {
                 {
                   getMeetingData(this.state.meetingSchedule).map(item => (
                     <Text style={styles.text}>
-                      <Text style={{ fontWeight: 'bold' }}>{item.label} </Text>
+                      <Text style={{ fontWeight: 'bold' }}>
+                        {item.label}
+                        {' '}
+                      </Text>
                       {item.value}
                     </Text>
                   ))

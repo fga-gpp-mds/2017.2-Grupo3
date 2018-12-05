@@ -2,7 +2,8 @@ import React from 'react';
 import { Checkbox } from 'react-native-checkbox-field'; // Checkbox only
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
-import { TouchableOpacity,
+import {
+  TouchableOpacity,
   Text,
   View,
   ScrollView,
@@ -10,7 +11,7 @@ import { TouchableOpacity,
   KeyboardAvoidingView,
   BackHandler,
 } from 'react-native';
-import { FOOD_QUALITY } from '../../constants/generalConstants';
+import { FOOD_QUALITY } from '../../constants/checklistConstants';
 import Header from '../../components/Header';
 import styles from '../../Styles/GeneralStyles';
 import { backHandlerPop } from '../../NavigationFunctions';
@@ -30,7 +31,7 @@ export default class FoodQualityCheckoutScreen extends React.Component {
         <Checkbox
           checkboxStyle={styles.checklist.checkBoxStyle}
           selected={item.markedYes}
-          selectedColor={'#008000'}
+          selectedColor="#008000"
           onSelect={() => {
             this.props.setFoodQualityReportPositive(item.key);
             this.props.setStatusFoodQuality(false);
@@ -48,7 +49,7 @@ export default class FoodQualityCheckoutScreen extends React.Component {
         <Checkbox
           checkboxStyle={styles.checklist.checkBoxStyle}
           selected={item.markedNo}
-          selectedColor={'#B22222'}
+          selectedColor="#B22222"
           onSelect={() => {
             this.props.setFoodQualityReportNegative(item.key);
             this.props.setStatusFoodQuality(false);
@@ -69,7 +70,7 @@ export default class FoodQualityCheckoutScreen extends React.Component {
     return (
       <View style={styles.checklist.principal}>
         <Header
-          title={'Lista de verificação'}
+          title="Lista de verificação"
           subTitle={FOOD_QUALITY}
         />
         <KeyboardAvoidingView style={styles.checklist.content} behavior="padding">
@@ -86,15 +87,16 @@ export default class FoodQualityCheckoutScreen extends React.Component {
                     {this.showNegativeCheckBox(item)}
                     <Text style={styles.checklist.label}>{item.label}</Text>
                   </View>
-                ),
-                )
+                ))
               }
             </View>
 
             <View>
               <Text
                 style={styles.checklist.observationText}
-              >Qual o cardápio mais aceito?</Text>
+              >
+Qual o cardápio mais aceito?
+              </Text>
               <View style={styles.checklist.observationBox}>
                 <TextInput
                   onChangeText={text => this.props.setAcceptedMenu(text)}
@@ -110,7 +112,9 @@ export default class FoodQualityCheckoutScreen extends React.Component {
             <View>
               <Text
                 style={styles.checklist.observationText}
-              >Qual o cardápio menos aceito?</Text>
+              >
+Qual o cardápio menos aceito?
+              </Text>
               <View style={styles.checklist.observationBox}>
                 <TextInput
                   onChangeText={text => this.props.setRefusedMenu(text)}
@@ -126,7 +130,9 @@ export default class FoodQualityCheckoutScreen extends React.Component {
             <View behavior="padding">
               <Text
                 style={styles.checklist.observationText}
-              >Alguma observação adicional? Insira aqui. (Opcional)</Text>
+              >
+Alguma observação adicional? Insira aqui. (Opcional)
+              </Text>
               <View style={styles.checklist.observationBox}>
                 <TextInput
                   onChangeText={text => this.props.setFoodQualityObservation(text)}

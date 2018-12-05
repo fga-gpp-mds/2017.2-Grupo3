@@ -8,7 +8,7 @@ import {
   KITCHEN,
   FOOD_PREPARATION,
   OTHER_OBSERVATION,
-} from './generalConstants';
+} from './checklistConstants';
 
 export const STYLE = `
   <style type="text/css" >

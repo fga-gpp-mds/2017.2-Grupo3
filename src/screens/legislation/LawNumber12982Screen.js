@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableHighlight,
@@ -18,32 +17,7 @@ import {
   LAW_12982_DATE,
 } from '../../constants/legislation/lawNumber12.982';
 import { backHandlerPop } from '../../NavigationFunctions';
-
-const styles = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: '300',
-    marginBottom: 20,
-  },
-  selectors: {
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  selector: {
-    backgroundColor: '#F5FCFF',
-    padding: 10,
-  },
-  activeSelector: {
-    fontWeight: 'bold',
-  },
-  selectTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    padding: 10,
-  },
-});
+import styles from '../../Styles/LegislationStyles/LawNumber12982Styles';
 
 export default class LawNumber12982Screen extends Component {
   state = {
@@ -72,8 +46,8 @@ export default class LawNumber12982Screen extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
-          title={'Legislação'}
-          subTitle={'Lei Nº 12.982'}
+          title="Legislação"
+          subTitle="Lei Nº 12.982"
         />
 
         <View style={styles.selectors}>

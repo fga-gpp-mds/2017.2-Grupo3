@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import FoodHandlerCheckoutScreen from '../../screens/reports/FoodHandlerCheckoutScreen';
-import { setFoodHandlerReportPositive,
+import {
+  setFoodHandlerReportPositive,
   setFoodHandlerReportNegative,
   setFoodHandlerObservation,
   setStatusFoodHandler,
@@ -18,7 +19,6 @@ const mapDispatchToProps = dispatch => ({
   setStatusFoodHandler: statusFoodHandler => dispatch(setStatusFoodHandler(statusFoodHandler)),
 });
 
-const FoodHandlerCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(FoodHandlerCheckoutScreen);
+const FoodHandlerCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(FoodHandlerCheckoutScreen);
 
 export default FoodHandlerCheckoutContainer;

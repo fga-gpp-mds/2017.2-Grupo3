@@ -4,7 +4,8 @@ import {
   setStockFoodReportPositive,
   setStockFoodReportNegative,
   setFoodStockObservation,
-  setStatusFoodStock } from '../../actions/reportActions';
+  setStatusFoodStock,
+} from '../../actions/reportActions';
 
 const mapStateToProps = state => ({
   report: state.report.foodStock,
@@ -18,7 +19,6 @@ const mapDispatchToProps = dispatch => ({
   setStatusFoodStock: statusFoodStock => dispatch(setStatusFoodStock(statusFoodStock)),
 });
 
-const StockFoodCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(StockFoodCheckoutScreen);
+const StockFoodCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(StockFoodCheckoutScreen);
 
 export default StockFoodCheckoutContainer;

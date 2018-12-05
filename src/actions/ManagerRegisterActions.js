@@ -6,15 +6,17 @@ import { Alert } from 'react-native';
 import { RESET_LIST } from './types';
 import { logInfo } from '../../logConfig/loggers';
 import {
-  APP_IDENTIFIER,
-  AUTHENTICATE_LINK_NUVEM_CIVICA,
-  DEFAULT_GROUP_LINK_NUVEM_CIVICA,
-  DEFAULT_USER_LINK_NUVEM_CIVICA,
   COUNSELOR_DISABLED_SUCCESS,
   COUNSELOR_DISABLED_FAILED,
   COUNSELOR_GROUP_DISABLED_SUCCESS,
   COUNSELOR_GROUP_DISABLED_FAILED,
-} from '../constants/generalConstants';
+} from '../constants/toastMessages';
+import {
+  DEFAULT_GROUP_LINK_NUVEM_CIVICA,
+  AUTHENTICATE_LINK_NUVEM_CIVICA,
+  DEFAULT_USER_LINK_NUVEM_CIVICA,
+} from '../constants/linkConstants';
+import { APP_IDENTIFIER } from '../constants/codeNumbers';
 import { convertingJSONToString } from './applicationActions';
 import treatingError from './errorUtils';
 
@@ -118,7 +120,8 @@ export const disableCounselorFromGroup = (counselor, codGroup, MASTER_TOKEN) => 
   return new Promise((resolve, reject) => {
     axios.delete(
       `${DEFAULT_GROUP_LINK_NUVEM_CIVICA}${codGroup}/membros/${counselor.codMembro}`,
-      disableGroupHeader)
+      disableGroupHeader,
+    )
       .then((response) => {
         logInfo(FILE_NAME, 'disableCounselorFromApp',
           ` Disable from group response: ${JSON.stringify(response.status)}`);

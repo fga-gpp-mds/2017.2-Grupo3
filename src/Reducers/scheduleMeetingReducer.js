@@ -1,7 +1,9 @@
 import initialState from './initialState';
-import { SET_MEETING_LOCATION_LATITUDE,
+import {
+  SET_MEETING_LOCATION_LATITUDE,
   SET_MEETING_LOCATION_LONGITUDE,
-  RESET_SCHEDULE_MEETING } from '../actions/types';
+  RESET_SCHEDULE_MEETING,
+} from '../actions/types';
 // import { logInfo } from '../../logConfig/loggers';
 
 // const FILE_NAME = 'schoolReducer.js';

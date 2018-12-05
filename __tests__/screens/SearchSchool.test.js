@@ -8,7 +8,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import SearchSchoolContainer from '../../src/Containers/SearchSchoolContainer';
 import SearchSchool from '../../src/screens/SearchSchool';
-import { SCHOOL_ENDPOINT } from '../../src/constants/generalConstants';
+import { SCHOOL_ENDPOINT } from '../../src/constants/linkConstants';
 
 const middlewares = [thunk];
 

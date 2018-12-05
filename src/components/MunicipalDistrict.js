@@ -6,7 +6,7 @@ import municipalDistricts from '../constants/municipalDistricts';
 import DropdownComponent from './DropdownComponent';
 
 const MunicipalDistrict = props => (
-  <View key="municipalDistrict" >
+  <View key="municipalDistrict">
     <Text>Município do CAE</Text>
 
     <DropdownComponent
@@ -16,8 +16,7 @@ const MunicipalDistrict = props => (
         <Picker.Item value="" label="Escolha o Município do seu CAE" color="#95a5a6" />,
       ]}
       pickerBody={
-        municipalDistricts[props.UfInitials].cidades.map(item =>
-          (<Picker.Item label={item} value={`${item} -`} color="#000000" />))}
+        municipalDistricts[props.UfInitials].cidades.map(item => (<Picker.Item label={item} value={`${item} -`} color="#000000" />))}
     />
 
   </View>

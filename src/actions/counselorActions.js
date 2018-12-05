@@ -10,20 +10,28 @@ import {
 import { isLoading, isNotLoading, convertingJSONToString } from './applicationActions';
 import { logInfo, logWarn } from '../../logConfig/loggers';
 import {
-  USER_JUST_ALREADY_REGISTER_IN_NUVEM,
-  USER_ALREADY_REGISTER_IN_APPLICATION,
-  REGISTER_FAIL_TITLE,
-  APP_IDENTIFIER,
-  AUTHENTICATE_LINK_NUVEM_CIVICA,
-  DEFAULT_USER_LINK_NUVEM_CIVICA,
-  PROFILE_TYPE_CODE,
-  DEFAULT_GROUP_LINK_NUVEM_CIVICA,
   LOGIN_SUCCEED,
-  LOGIN_PASSWORD_ERROR,
   INTERNAL_ERROR,
   REGISTER_SUCCEED,
   REGISTER_NUVEM_ERROR,
-} from '../constants/generalConstants';
+} from '../constants/toastMessages';
+import {
+  LOGIN_PASSWORD_ERROR,
+} from '../constants/toastMessages';
+import {
+  REGISTER_FAIL_TITLE,
+  USER_ALREADY_REGISTER_IN_APPLICATION,
+  USER_JUST_ALREADY_REGISTER_IN_NUVEM,
+} from '../constants/alertTitlesMessages';
+import {
+  AUTHENTICATE_LINK_NUVEM_CIVICA,
+  DEFAULT_USER_LINK_NUVEM_CIVICA,
+  DEFAULT_GROUP_LINK_NUVEM_CIVICA,
+} from '../constants/linkConstants';
+import {
+  APP_IDENTIFIER,
+  PROFILE_TYPE_CODE,
+} from '../constants/codeNumbers';
 import ShowToast from '../components/Toast';
 import {
   AUTH_LOGIN_ERROR,
@@ -32,7 +40,7 @@ import {
 } from '../constants/errorConstants';
 import { errorGenerator } from './schedulingVisitActions';
 import { editAccountData, editCounselorProfile } from './auxiliary/editCounselorAuxiliary';
-import { treatingGetUserProfileInLoginError } from '../ErrorTreatment';
+import getUserProfileInLoginErrorHandler from '../customErrorTreatments/userProfileInLoginError';
 
 const FILE_NAME = 'counselorActions.js';
 
@@ -579,7 +587,7 @@ export const selectTypeOfAuthenticationFailure = (errorMessage) => {
       break;
     case PROFILE_LOGIN_ERROR:
       logWarn(FILE_NAME, 'asyncLoginCounselor', 'ProfileError');
-      treatingGetUserProfileInLoginError(errorMessage.status);
+      getUserProfileInLoginErrorHandler(errorMessage.status);
       break;
     case GROUP_LOGIN_ERROR:
       logWarn(FILE_NAME, 'asyncLoginCounselor', 'GroupError');
@@ -607,14 +615,11 @@ export const asyncLoginCounselor = userData => async (dispatch) => {
   dispatch(isLoading());
 
   try {
-    const counselorAuthenticated =
-      await counselorActionsAuxiliary.authenticatingCounselorInLogin(authenticationHeader);
+    const counselorAuthenticated = await counselorActionsAuxiliary.authenticatingCounselorInLogin(authenticationHeader);
 
-    const counselorWithProfile =
-      await counselorActionsAuxiliary.getUserProfileInLogin(counselorAuthenticated);
+    const counselorWithProfile = await counselorActionsAuxiliary.getUserProfileInLogin(counselorAuthenticated);
 
-    const counselorWithCodGroup =
-      await counselorActionsAuxiliary.getCodGroup(counselorWithProfile);
+    const counselorWithCodGroup = await counselorActionsAuxiliary.getCodGroup(counselorWithProfile);
 
     dispatch(setCounselor(counselorWithCodGroup));
 

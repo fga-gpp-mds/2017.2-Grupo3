@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, ScrollView, BackHandler } from 'react-native';
+import {
+  Text, View, TouchableOpacity, ScrollView, BackHandler,
+} from 'react-native';
 import PopupDialog, {
   DialogTitle,
   DialogButton,
@@ -14,7 +16,7 @@ import * as constant from '../constants/sendAgentEmail';
 import { backHandlerPopToMain } from '../NavigationFunctions';
 import Header from '../components/Header';
 import ShowToast from '../components/Toast';
-import { NO_OTHER_COUNSELORS } from '../constants/generalConstants';
+import { NO_OTHER_COUNSELORS } from '../constants/toastMessages';
 import styles from '../Styles/SchedulingVisitStyles';
 import InviteAgent from '../components/InviteAgent';
 
@@ -54,16 +56,18 @@ export default class SchedulingVisit extends React.Component {
     return (
       <View style={styles.principal}>
         <Header
-          title={'Agendar Visita'}
+          title="Agendar Visita"
           onPress={() => Actions.popTo('mainScreen')}
         />
         <PopupDialog
           ref={(popupDialogAgent) => { this.popupDialogAgent = popupDialogAgent; }}
           height="45%"
           width="90%"
-          dialogTitle={<DialogTitle
-            title="Convidar um Agente?"
-          />}
+          dialogTitle={(
+            <DialogTitle
+              title="Convidar um Agente?"
+            />
+)}
           actions={[
             <View style={styles.footerPopUp}>
               <DialogButton
@@ -89,7 +93,8 @@ export default class SchedulingVisit extends React.Component {
 
             <EmailField
               callback={emailInput => this.setState(
-                { visit: { ...this.state.visit, agentEmail: emailInput } })}
+                { visit: { ...this.state.visit, agentEmail: emailInput } },
+              )}
               placeholder="Email"
               onSubmitEditing={() => this.setState({ focus: true })}
               value={this.state.email}
@@ -215,8 +220,8 @@ export default class SchedulingVisit extends React.Component {
             {this.InviteAgentObject.showAgentEmail()}
 
             <View>
-              {this.props.school.schoolSelected &&
-                this.state.visit.date !== '' && this.state.visit.time !== '' && (
+              {this.props.school.schoolSelected
+                && this.state.visit.date !== '' && this.state.visit.time !== '' && (
                 <Button
                   enabled
                   key="scheduleButton"
@@ -241,7 +246,9 @@ export default class SchedulingVisit extends React.Component {
 }
 
 
-const { shape, string, number, func } = PropTypes;
+const {
+  shape, string, number, func,
+} = PropTypes;
 
 SchedulingVisit.propTypes = {
   asyncSchedulingVisit: func.isRequired,

@@ -1,9 +1,13 @@
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, View, TouchableOpacity, ScrollView, ActivityIndicator, Alert } from 'react-native';
-import InvitedCounselorsData from '../components/InvitedCounselorsData';
+import {
+  Text, View, TouchableOpacity, ScrollView, ActivityIndicator, Alert,
+} from 'react-native';
+import InvitedCounselorsData from './InvitedCounselorsData';
 import styles from '../Styles/SchedulingVisitStyles';
+import ShowEmail from './ShowEmail';
+import { LabeledField } from './LabeledField';
 
 class InviteAgent extends React.Component {
   constructor(props) {
@@ -25,6 +29,7 @@ class InviteAgent extends React.Component {
       enabled: true,
     };
   }
+
   invitingAgent(popupDialogAgent) {
     const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -35,7 +40,8 @@ class InviteAgent extends React.Component {
         [
           { text: 'Ok', onPress: () => { }, style: 'cancel' },
         ],
-        { cancelable: false });
+        { cancelable: false },
+      );
     } else {
       this.setState({ visit: { ...this.state.visit, invitedAgent: true } });
       popupDialogAgent.dismiss();
@@ -49,23 +55,28 @@ class InviteAgent extends React.Component {
   }
 
   showAgentEmail() {
-    if (this.state.visit.agentEmail !== '') {
-      return (
-        <View>
-          <Text style={styles.TopListText}>Agente Convidado</Text>
-          <View style={styles.InputFieldStyle}>
-            <Text>{this.state.visit.agentEmail}</Text>
-          </View>
-        </View>
-      );
-    }
+    // if (this.state.visit.agentEmail !== '') {
+    //   return (
+    //     <View>
+    //       <Text style={styles.TopListText}>Agente Convidado</Text>
+    //       <View style={styles.InputFieldStyle}>
+    //         <Text>{this.state.visit.agentEmail}</Text>
+    //       </View>
+    //     </View>
+    //   );
+    // }
+    // return (
+    //   <View>
+    //     <Text style={styles.TopListText}>Agente Convidado</Text>
+    //     <View style={styles.InputFieldStyle}>
+    //       <Text style={styles.NoInvitedAgent}>Nenhum agente convidado</Text>
+    //     </View>
+    //   </View>
+    // );
     return (
-      <View>
-        <Text style={styles.TopListText}>Agente Convidado</Text>
-        <View style={styles.InputFieldStyle}>
-          <Text style={styles.NoInvitedAgent}>Nenhum agente convidado</Text>
-        </View>
-      </View>
+      <ShowEmail
+        agentEmail={this.state.agentEmail}
+      />
     );
   }
 
@@ -181,18 +192,24 @@ class InviteAgent extends React.Component {
             onPress={() => this.manageInvitedListState(counselor)}
           >
             <View style={styles.textBox}>
-              <Text style={styles.text}>
-                <Text style={styles.ConsuelorInformation}>Nome: </Text>
-                {counselor.name}
-              </Text>
-              <Text style={styles.text}>
-                <Text style={styles.ConsuelorInformation}>CPF: </Text>
-                {counselor.profile.cpf}
-              </Text>
-              <Text style={styles.text}>
-                <Text style={styles.ConsuelorInformation}>Telefone: </Text>
-                {counselor.profile.phone}
-              </Text>
+              <LabeledField
+                label="Nome"
+                value={counselor.name}
+                wrapperStyle={styles.text}
+                labelStyle={styles.ConsuelorInformation}
+              />
+              <LabeledField
+                label="CPF"
+                value={counselor.profile.cpf}
+                wrapperStyle={styles.text}
+                labelStyle={styles.ConsuelorInformation}
+              />
+              <LabeledField
+                label="Telefone"
+                value={counselor.profile.phone}
+                wrapperStyle={styles.text}
+                labelStyle={styles.ConsuelorInformation}
+              />
             </View>
           </TouchableOpacity>
         </View>

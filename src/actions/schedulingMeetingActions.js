@@ -9,13 +9,16 @@ import {
   convertingContentStringToJSON,
 } from './applicationActions';
 import {
-  APP_IDENTIFIER,
   POSTS_LINK_NUVEM_CIVICA,
+} from '../constants/linkConstants';
+import {
+  APP_IDENTIFIER,
   MEETING_POSTING_TYPE_CODE,
-} from '../constants/generalConstants';
+} from '../constants/codeNumbers';
 import { SET_MEETING_LOCATION_LONGITUDE, SET_MEETING_LOCATION_LATITUDE } from './types';
 import { resetList, setScheduleMeetingList } from './listActions';
-import { GetMeetingPostListError, GetMeetingContentError } from '../Exceptions';
+import GetMeetingPostListError from '../customExceptions/meetingPostListError';
+import GetMeetingContentError from '../customExceptions/meetingContentError';
 import { dateNotExpired } from './auxiliary/schedulingMeeting/schedulingMeetingAuxiliary';
 import {
   treatingPostsError,
@@ -28,8 +31,7 @@ export const FILE_NAME = 'schedulingMeetingActions.js';
 const defineMeetingStatus = (meetingSchedule, counselor, dispatch) => {
   logInfo(FILE_NAME, 'defineMeetingStatus', `${JSON.stringify(meetingSchedule)}`);
 
-  const counselorInvited =
-    meetingSchedule.content.meetingListOfInvitees[counselor.nuvemCode] !== undefined;
+  const counselorInvited = meetingSchedule.content.meetingListOfInvitees[counselor.nuvemCode] !== undefined;
   const validMeeting = !dateNotExpired(meetingSchedule);
 
   if (counselorInvited && validMeeting) {
@@ -108,9 +110,9 @@ export const asyncGetScheduleMeeting = counselor => async (dispatch) => {
   };
 
   try {
-    const meetingSchedulePostList =
-      await meetingScheduleActionsAuxiliary.getMeetingPostList(
-        getScheduleMeetingParamsAndHeader);
+    const meetingSchedulePostList = await meetingScheduleActionsAuxiliary.getMeetingPostList(
+      getScheduleMeetingParamsAndHeader,
+    );
 
     const meetingScheduleContentList = [];
     // Get the content for each meeting schedule post in list and organize then.
@@ -119,7 +121,8 @@ export const asyncGetScheduleMeeting = counselor => async (dispatch) => {
         meetingScheduleActionsAuxiliary.getMeetingContent(
           meetingSchedulePostList.data[i].conteudos[0].links[0].href,
           counselor,
-          dispatch),
+          dispatch,
+        ),
       );
     }
 

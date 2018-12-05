@@ -7,7 +7,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import configureStore from 'redux-mock-store';
 import VisitInvitesContainer from '../../src/Containers/VisitInvitesContainer';
 import VisitInvites from '../../src/screens/VisitInvites';
-import { SCHOOL_ENDPOINT } from '../../src/constants/generalConstants';
+import { SCHOOL_ENDPOINT } from '../../src/constants/linkConstants';
 import * as Toast from '../../src/components/Toast';
 
 const middlewares = [thunk];

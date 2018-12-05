@@ -1,7 +1,6 @@
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   ScrollView,
   View,
@@ -13,50 +12,7 @@ import {
 import { Actions } from 'react-native-router-flux';
 import Header from '../../components/Header';
 import { backHandlerPopToMain } from '../../NavigationFunctions';
-
-const styles = StyleSheet.create({
-  legislationScreen: {
-    flex: 1,
-    backgroundColor: '#FAFAFA',
-  },
-  buttonContainer: {
-    paddingVertical: 10,
-    borderWidth: 1,
-    borderRadius: 7,
-    marginHorizontal: 15,
-    marginTop: 30,
-    marginBottom: 20,
-    backgroundColor: '#FF9500',
-    justifyContent: 'flex-end',
-  },
-  buttonText: {
-    paddingLeft: 20,
-    paddingTop: 5,
-    color: 'blue',
-    fontSize: 20,
-    paddingRight: 10,
-  },
-  buttonTexts: {
-    padding: 5,
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  icon: {
-    marginHorizontal: 10,
-    // justifyContent: 'flex-end',
-  },
-  fieldStyle: {
-    padding: 15,
-    margin: 6,
-    backgroundColor: 'white',
-    flexDirection: 'row',
-    borderColor: 'black',
-    borderWidth: 2,
-    borderRadius: 3,
-    justifyContent: 'space-between',
-  },
-});
+import styles from '../../Styles/LegislationStyles/MainLegislationScreenStyles';
 
 export default class MainLegislationScreen extends React.PureComponent {
   componentWillMount() {
@@ -71,7 +27,7 @@ export default class MainLegislationScreen extends React.PureComponent {
     return (
       <View style={styles.legislationScreen}>
         <Header
-          title={'Legislação'}
+          title="Legislação"
         />
         <ScrollView>
           <View style={{ padding: 10 }}>
@@ -148,8 +104,8 @@ export default class MainLegislationScreen extends React.PureComponent {
               style={styles.fieldStyle}
               onPress={() => Alert.alert(
                 'Cartilha',
-                'Para visualizar a cartilha do PNAE, é necessário baixá-la externamente em seu navegador de internet, ' +
-                'deseja continuar?',
+                'Para visualizar a cartilha do PNAE, é necessário baixá-la externamente em seu navegador de internet, '
+                + 'deseja continuar?',
                 [
                   { text: 'Não', style: 'cancel' },
                   { text: 'Sim', onPress: () => Linking.openURL('http://portal.tcu.gov.br/main.jsp?lumPageId=8A8182A25B4A7A25015B5E1770516ECC&previewItemId=8A8182A25B4A7A25015B5E21D1AA2BB0&lumItemId=8A8182A25B4A7A25015B5E21D1CD2BB4') },
@@ -164,8 +120,8 @@ export default class MainLegislationScreen extends React.PureComponent {
               style={styles.fieldStyle}
               onPress={() => Alert.alert(
                 'Consultar Legislação e Manuais',
-                'Ao clicar em Sim, você será redirecionado para o site do PNAE, onde será ' +
-                'possível consultar todos os manuais e legislações disponíveis, deseja continuar?',
+                'Ao clicar em Sim, você será redirecionado para o site do PNAE, onde será '
+                + 'possível consultar todos os manuais e legislações disponíveis, deseja continuar?',
                 [
                   { text: 'Não', style: 'cancel' },
                   { text: 'Sim', onPress: () => Linking.openURL('http://www.fnde.gov.br/programas/pnae') },

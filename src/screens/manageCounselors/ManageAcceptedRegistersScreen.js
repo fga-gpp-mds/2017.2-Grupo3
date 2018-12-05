@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
@@ -14,22 +13,7 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 import { getManagerCounselorData } from '../../services/extractDataCounselor';
 import ScheduleCard from '../../components/ScheduleCard';
 import Button from '../../components/Button';
-
-const buttonBox = StyleSheet.create({
-  design: {
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 7,
-    backgroundColor: '#FF3B30',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 13,
-  },
-  text: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-});
+import buttonBox from '../../Styles/ManageConselors/ManageAcceptedRegistersStyles';
 
 export default class ManageAcceptedRegistersScreen extends React.Component {
   componentWillMount() {
@@ -58,7 +42,8 @@ export default class ManageAcceptedRegistersScreen extends React.Component {
             this.getCounselorFromGroup();
           },
         },
-      ]);
+      ],
+    );
   }
 
 
@@ -67,7 +52,7 @@ export default class ManageAcceptedRegistersScreen extends React.Component {
       return (
         LoadingIndicator
       );
-    } else if (this.props.listOfCheckedCounselors.length === 0) {
+    } if (this.props.listOfCheckedCounselors.length === 0) {
       return (
         <View style={stylesList.noneScheduleTextBox}>
           <Text style={stylesList.noneScheduleText}>Nenhum Conselheiro Validado!</Text>
@@ -103,7 +88,9 @@ export default class ManageAcceptedRegistersScreen extends React.Component {
   }
 }
 
-const { shape, string, number, bool } = PropTypes;
+const {
+  shape, string, number, bool,
+} = PropTypes;
 
 ManageAcceptedRegistersScreen.propTypes = {
   application: PropTypes.bool.isRequired,

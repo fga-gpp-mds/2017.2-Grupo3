@@ -8,9 +8,9 @@ import {
 } from '../../constants/errorConstants';
 import {
   DEFAULT_GROUP_LINK_NUVEM_CIVICA,
-  APP_IDENTIFIER,
   DEFAULT_USER_LINK_NUVEM_CIVICA,
-} from '../../constants/generalConstants';
+} from '../../constants/linkConstants';
+import { APP_IDENTIFIER } from '../../constants/codeNumbers';
 import { errorGenerator } from '../schedulingVisitActions';
 
 

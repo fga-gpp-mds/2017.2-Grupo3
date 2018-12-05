@@ -1,5 +1,6 @@
 import initialState from './initialState';
-import { IS_LOADING,
+import {
+  IS_LOADING,
   IS_NOT_LOADING,
 } from '../actions/types';
 // import { logTrace, logError } from '../../logConfig/loggers';

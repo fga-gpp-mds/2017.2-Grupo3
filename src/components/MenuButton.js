@@ -13,15 +13,17 @@ const MenuButton = props => (
   >
 
     <View style={styles.fieldStyle}>
-      {props.isLogout &&
-        (<MaterialCommunityIcons
+      {props.isLogout
+        && (
+        <MaterialCommunityIcons
           name={props.iconName}
           style={styles.icon}
           size={32}
           color="black"
-        />)}
-      {!props.isLogout &&
-        (<MaterialIcons name={props.iconName} style={styles.icon} size={32} color="black" />)}
+        />
+        )}
+      {!props.isLogout
+        && (<MaterialIcons name={props.iconName} style={styles.icon} size={32} color="black" />)}
       <Text
         style={styles.item}
       >

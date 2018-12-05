@@ -1,8 +1,10 @@
 import initialState from './initialState';
-import { SET_SCHOOL_INFO,
+import {
+  SET_SCHOOL_INFO,
   SET_SCHOOL_UF,
   SET_SCHOOL_CITY,
-  RESET_SCHOOL } from '../actions/types';
+  RESET_SCHOOL,
+} from '../actions/types';
 // import { logInfo } from '../../logConfig/loggers';
 
 // const FILE_NAME = 'schoolReducer.js';

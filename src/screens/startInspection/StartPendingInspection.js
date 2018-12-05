@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   ScrollView,
@@ -17,174 +16,13 @@ import stylesList from '../../Styles/ListStyles';
 import ScheduleCard from '../../components/ScheduleCard';
 import Button from '../../components/Button';
 import { getVisitData, getCounselorData } from '../../services/extractDataInspection';
-
-
-const styles = StyleSheet.create({
-  principal: {
-    flex: 1,
-  },
-
-  content: {
-    flex: 1,
-    paddingTop: 6,
-    backgroundColor: 'white',
-  },
-
-  listSchedule: {
-    flex: 1,
-    marginHorizontal: 15,
-    marginVertical: 10,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 3,
-    backgroundColor: '#FAFAFA',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  textBox: {
-    flex: 4,
-    paddingLeft: 4,
-    justifyContent: 'flex-start',
-    marginRight: 15,
-  },
-
-  text: {
-    fontSize: 15,
-    paddingVertical: 2,
-  },
-
-  buttonBox: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: '#4cd964',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-
-  buttonInvitees: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: 'white',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-
-  buttonText: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-
-  popUp: {
-    marginBottom: 120,
-  },
-
-  footerPopUp: {
-    backgroundColor: '#F9F9FB',
-    borderColor: '#DAD9DC',
-    borderTopWidth: 0.5,
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  listRegisters: {
-    marginHorizontal: 10,
-    marginVertical: 5,
-    borderColor: 'black',
-    borderWidth: 1.5,
-    borderRadius: 7,
-    backgroundColor: '#FAFAFA',
-    justifyContent: 'space-between',
-  },
-});
-
-
-const buttonInviteesStyle = StyleSheet.create({
-  design: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: 'white',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-
-  text: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-});
-
-const buttonBoxStyle = StyleSheet.create({
-  design: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: '#4cd964',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-
-  text: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-});
-
-const buttonBoxStyleNotInvitee = StyleSheet.create({
-  design: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: '#ff3b30',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-
-  text: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-});
-
-const buttonBoxStyleNotConfirm = StyleSheet.create({
-  design: {
-    borderColor: 'black',
-    borderWidth: 0.8,
-    borderRadius: 7,
-    backgroundColor: '#ffcc00',
-    padding: 8,
-    justifyContent: 'center',
-    marginRight: 15,
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  text: {
-    fontSize: 12,
-    textAlign: 'center',
-  },
-});
+import {
+  styles,
+  buttonBoxStyle,
+  buttonBoxStyleNotConfirm,
+  buttonBoxStyleNotInvitee,
+  buttonInviteesStyle,
+} from '../../Styles/StartInspection/StartPendingInspectionStyles';
 
 class StartPendingInspection extends React.Component {
   constructor(props) {
@@ -206,7 +44,7 @@ class StartPendingInspection extends React.Component {
       return (
         <ActivityIndicator style={{ marginTop: 50 }} size="large" color="#FF9500" />
       );
-    } else if (this.props.listOfPendingScheduleInAGroup.length === 0) {
+    } if (this.props.listOfPendingScheduleInAGroup.length === 0) {
       return (
         <View style={stylesList.noneScheduleTextBox}>
           <Text style={stylesList.noneScheduleText}>Nenhum Agendamento Pendente!</Text>
@@ -225,7 +63,8 @@ class StartPendingInspection extends React.Component {
             {
               this.renderPaticipantsButton(
                 visitSchedule,
-                Object.keys(visitSchedule.content.visitListOfInvitees).length)
+                Object.keys(visitSchedule.content.visitListOfInvitees).length,
+              )
             }
           </View>
         </ScheduleCard>
@@ -243,7 +82,7 @@ class StartPendingInspection extends React.Component {
           onPress={() => { }}
         />
       );
-    } else if (!visitListOfInvitees[this.props.counselor.nuvemCode].confirmed) {
+    } if (!visitListOfInvitees[this.props.counselor.nuvemCode].confirmed) {
       return (
         <Button
           style={buttonBoxStyleNotConfirm}
@@ -293,15 +132,14 @@ class StartPendingInspection extends React.Component {
   renderPaticipantsButton(visitSchedule, numberOfParticipants) {
     console.log(visitSchedule);
     let participantsButton;
-    if (numberOfParticipants > 1 ||
-      !visitSchedule.content.visitListOfInvitees[this.props.counselor.nuvemCode] !== undefined) {
+    if (numberOfParticipants > 1
+      || !visitSchedule.content.visitListOfInvitees[this.props.counselor.nuvemCode] !== undefined) {
       participantsButton = (
         <Button
           style={buttonInviteesStyle}
           text="PARTICIPANTES"
           enabled
-          onPress={() =>
-            this.mountvisitListOfInvitees(visitSchedule.content.visitListOfInvitees)}
+          onPress={() => this.mountvisitListOfInvitees(visitSchedule.content.visitListOfInvitees)}
         />
       );
     }

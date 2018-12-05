@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableHighlight,
@@ -18,36 +17,7 @@ import {
   RESOLUTION_1_DATE,
 } from '../../constants/legislation/resolutionNumber1';
 import { backHandlerPop } from '../../NavigationFunctions';
-
-const styles = StyleSheet.create({
-  title: {
-    textAlign: 'center',
-    fontSize: 22,
-    fontWeight: '300',
-    marginBottom: 20,
-  },
-  selectors: {
-    marginBottom: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  selector: {
-    backgroundColor: '#F5FCFF',
-    paddingBottom: 20,
-    paddingTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  activeSelector: {
-    fontWeight: 'bold',
-  },
-  selectTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    padding: 10,
-    justifyContent: 'center',
-  },
-});
+import styles from '../../Styles/LegislationStyles/Resolution1ScreenStyles';
 
 export default class Resolution1Screen extends Component {
   state = {
@@ -76,8 +46,8 @@ export default class Resolution1Screen extends Component {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>
         <Header
-          title={'Legislação'}
-          subTitle={'Resolução Nº 1'}
+          title="Legislação"
+          subTitle="Resolução Nº 1"
         />
         <ScrollView
           horizontal

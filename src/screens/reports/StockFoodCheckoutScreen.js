@@ -3,7 +3,8 @@ import React from 'react';
 import { Checkbox } from 'react-native-checkbox-field'; // Checkbox only
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
-import { TouchableOpacity,
+import {
+  TouchableOpacity,
   Text,
   View,
   ScrollView,
@@ -11,7 +12,7 @@ import { TouchableOpacity,
   KeyboardAvoidingView,
   BackHandler,
 } from 'react-native';
-import { FOOD_STOCK } from '../../constants/generalConstants';
+import { FOOD_STOCK } from '../../constants/checklistConstants';
 import Header from '../../components/Header';
 import styles from '../../Styles/GeneralStyles';
 import { backHandlerPop } from '../../NavigationFunctions';
@@ -31,7 +32,7 @@ export default class StockFoodCheckoutScreen extends React.Component {
         <Checkbox
           checkboxStyle={styles.checklist.checkBoxStyle}
           selected={item.markedYes}
-          selectedColor={'#008000'}
+          selectedColor="#008000"
           onSelect={() => {
             this.props.setStockFoodReportPositive(item.key);
             this.props.setStatusFoodStock(false);
@@ -49,7 +50,7 @@ export default class StockFoodCheckoutScreen extends React.Component {
         <Checkbox
           checkboxStyle={styles.checklist.checkBoxStyle}
           selected={item.markedNo}
-          selectedColor={'#B22222'}
+          selectedColor="#B22222"
           onSelect={() => {
             this.props.setStockFoodReportNegative(item.key);
             this.props.setStatusFoodStock(false);
@@ -70,7 +71,7 @@ export default class StockFoodCheckoutScreen extends React.Component {
     return (
       <View style={styles.checklist.principal}>
         <Header
-          title={'Relatório'}
+          title="Relatório"
           subTitle={FOOD_STOCK}
         />
         <KeyboardAvoidingView style={styles.checklist.content} behavior="padding">
@@ -87,15 +88,16 @@ export default class StockFoodCheckoutScreen extends React.Component {
                     {this.showNegativeCheckBox(item)}
                     <Text style={styles.checklist.label}>{item.label}</Text>
                   </View>
-                ),
-                )
+                ))
               }
             </View>
 
             <View behavior="padding">
               <Text
                 style={styles.checklist.observationText}
-              >Alguma observação adicional? Insira aqui. (Opcional)</Text>
+              >
+Alguma observação adicional? Insira aqui. (Opcional)
+              </Text>
               <View style={styles.checklist.observationBox}>
                 <TextInput
                   onChangeText={text => this.props.setFoodStockObservation(text)}

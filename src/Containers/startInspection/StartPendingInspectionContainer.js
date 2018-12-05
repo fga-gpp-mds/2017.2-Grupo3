@@ -4,7 +4,8 @@ import { resetStore } from '../../actions/applicationActions';
 import { asyncGetCounselorFromGroup } from '../../actions/listActions';
 import {
   asyncGetSchedule,
-  setCurrentInspection } from '../../actions/schedulingVisitActions';
+  setCurrentInspection,
+} from '../../actions/schedulingVisitActions';
 
 const mapStateToProps = state => (
   {

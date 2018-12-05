@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Text, View, TouchableOpacity, StyleSheet,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import openMap from 'react-native-open-maps';
 

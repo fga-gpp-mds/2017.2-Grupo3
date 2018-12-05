@@ -8,8 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSchoolInfo: selectedSchoolCode =>
-    dispatch(asyncChangeToSchoolInfoScreen({ schoolCode: selectedSchoolCode })),
+  setSchoolInfo: selectedSchoolCode => dispatch(asyncChangeToSchoolInfoScreen({ schoolCode: selectedSchoolCode })),
   setUf: uf => dispatch(setUf(uf)),
   setCity: city => dispatch(setCity(city)),
 });

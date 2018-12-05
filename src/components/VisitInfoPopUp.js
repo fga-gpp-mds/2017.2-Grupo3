@@ -108,7 +108,7 @@ class VisitInfoPopUp extends React.PureComponent {
     }
 
     return (
-      <View style={styles.listSchedule} >
+      <View style={styles.listSchedule}>
         <View style={styles.textBox}>
           <Text style={styles.text}>
             <Text style={{ fontWeight: 'bold' }}>Escola: </Text>

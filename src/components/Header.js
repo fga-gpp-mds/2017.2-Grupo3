@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import {
+  View, StyleSheet, Text, TouchableOpacity, Dimensions,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { Actions } from 'react-native-router-flux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -56,7 +58,7 @@ const styles = StyleSheet.create(
 const Header = props => (
   <View style={styles.wrapper}>
     <View style={styles.buttonWrapper}>
-      <TouchableOpacity onPress={props.onPress} >
+      <TouchableOpacity onPress={props.onPress}>
         <Ionicons name="ios-arrow-back-outline" style={styles.icon} size={45} color="black" />
       </TouchableOpacity>
     </View>

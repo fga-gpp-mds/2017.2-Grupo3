@@ -2,7 +2,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import {
   DEFAULT_USER_LINK_NUVEM_CIVICA,
-} from '../../../src/constants/generalConstants';
+} from '../../../src/constants/linkConstants';
 import {
   EDIT_ACCOUNT_ERROR,
   EDIT_PROFILE_ERROR,

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import WaterSewerSupplyCheckoutScreen from '../../screens/reports/WaterSewerSupplyCheckoutScreen';
-import { setWaterSewerSupplyReportPositive,
+import {
+  setWaterSewerSupplyReportPositive,
   setWaterSewerSupplyReportNegative,
   setWaterSewerSupplyObservation,
   setStatusWaterSewerSupply,
@@ -14,13 +15,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setWaterSewerSupplyReportPositive: key => dispatch(setWaterSewerSupplyReportPositive(key)),
   setWaterSewerSupplyReportNegative: key => dispatch(setWaterSewerSupplyReportNegative(key)),
-  setWaterSewerSupplyObservation: observation =>
-    dispatch(setWaterSewerSupplyObservation(observation)),
-  setStatusWaterSewerSupply: statusWaterSewerSupply =>
-    dispatch(setStatusWaterSewerSupply(statusWaterSewerSupply)),
+  setWaterSewerSupplyObservation: observation => dispatch(setWaterSewerSupplyObservation(observation)),
+  setStatusWaterSewerSupply: statusWaterSewerSupply => dispatch(setStatusWaterSewerSupply(statusWaterSewerSupply)),
 });
 
-const WaterSewerSupplyCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(WaterSewerSupplyCheckoutScreen);
+const WaterSewerSupplyCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(WaterSewerSupplyCheckoutScreen);
 
 export default WaterSewerSupplyCheckoutContainer;

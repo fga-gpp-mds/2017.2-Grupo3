@@ -44,7 +44,10 @@ class ScheduleCard extends React.Component {
           {
             this.props.data.map(item => (
               <Text style={styles.text}>
-                <Text style={{ fontWeight: 'bold' }}>{item.label} </Text>
+                <Text style={{ fontWeight: 'bold' }}>
+                  {item.label}
+                  {' '}
+                </Text>
                 {item.value}
               </Text>
             ))}

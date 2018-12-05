@@ -17,7 +17,8 @@ const sendEmailAlert = (visitData, counselor) => {
     null,
     null,
     constant.EMAIL_SUBJECT,
-    emailBody);
+    emailBody,
+  );
 };
 
 export default sendEmailAlert;

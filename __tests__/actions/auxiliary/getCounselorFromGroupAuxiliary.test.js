@@ -2,9 +2,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import {
   DEFAULT_GROUP_LINK_NUVEM_CIVICA,
-  APP_IDENTIFIER,
   DEFAULT_USER_LINK_NUVEM_CIVICA,
-} from '../../../src/constants/generalConstants';
+} from '../../../src/constants/linkConstants';
 import {
   getCounselorFromGroup,
   getCounselor,
@@ -17,6 +16,7 @@ import {
   GET_COUNSELORS_FROM_CAE_PROFILE_ERROR,
   GET_GROUP_ERROR,
 } from '../../../src/constants/errorConstants';
+import { APP_IDENTIFIER } from '../../../src/constants/codeNumbers';
 import { convertingContentStringToJSON } from '../../../src/actions/applicationActions';
 
 describe('Testing getCounselorFromGroupAuxiliary functions', () => {

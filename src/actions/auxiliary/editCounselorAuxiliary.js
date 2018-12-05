@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { convertingJSONToString } from '../applicationActions';
 // Functions focused in Edit Couselor Data
-import { DEFAULT_USER_LINK_NUVEM_CIVICA } from '../../constants/generalConstants';
+import { DEFAULT_USER_LINK_NUVEM_CIVICA } from '../../constants/linkConstants';
 import { logInfo, logWarn } from '../../../logConfig/loggers';
 import { errorGenerator } from '../schedulingVisitActions';
 import { EDIT_PROFILE_ERROR, EDIT_ACCOUNT_ERROR } from '../../constants/errorConstants';
@@ -28,7 +28,8 @@ export const editCounselorProfile = async (counselorData) => {
 
   try {
     await axios.put(
-      `${DEFAULT_USER_LINK_NUVEM_CIVICA}${counselorData.nuvemCode}/perfil`, bodyToEditCounselorProfile, headerToEditCounselor);
+      `${DEFAULT_USER_LINK_NUVEM_CIVICA}${counselorData.nuvemCode}/perfil`, bodyToEditCounselorProfile, headerToEditCounselor,
+    );
 
     logInfo(FILE_NAME, 'editCounselorProfile',
       `Counselor Profile edited. Sending to Store: ${counselorData.name} and ${JSON.stringify(counselorData.profile, null, 2)}`);
@@ -54,7 +55,8 @@ export const editAccountData = async (counselorData) => {
 
   try {
     const response = await axios.put(
-      `${DEFAULT_USER_LINK_NUVEM_CIVICA}${counselorData.nuvemCode}`, bodyToEditCounselor, headerToEditCounselor);
+      `${DEFAULT_USER_LINK_NUVEM_CIVICA}${counselorData.nuvemCode}`, bodyToEditCounselor, headerToEditCounselor,
+    );
 
     logInfo(FILE_NAME, 'editCounselor',
       `User data of Counselor edited: ${JSON.stringify(response.data, null, 2)}`);

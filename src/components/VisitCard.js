@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Text, View, TouchableOpacity, StyleSheet,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import { logInfo } from '../../logConfig/loggers';
 
@@ -139,19 +141,18 @@ class VisitCard extends React.Component {
         />
       );
     } else {
-      confirmOrCancelButton =
-        (
-          <ConfirmAndCancelButtons
-            text="CONFIRMAR PRESENÇA"
-            buttonCallBack={() => this.buttonCallBack(true)}
-            style={styles.buttonBox}
-            key="confirmPresenceButton"
-          />
-        );
+      confirmOrCancelButton = (
+        <ConfirmAndCancelButtons
+          text="CONFIRMAR PRESENÇA"
+          buttonCallBack={() => this.buttonCallBack(true)}
+          style={styles.buttonBox}
+          key="confirmPresenceButton"
+        />
+      );
     }
 
     return (
-      <View style={styles.listSchedule} >
+      <View style={styles.listSchedule}>
         <View style={styles.textBox}>
           <Text style={styles.text}>
             <Text style={{ fontWeight: 'bold' }}>Escola: </Text>

@@ -4,7 +4,8 @@ import {
   setRefectoryReportPositive,
   setRefectoryReportNegative,
   setRefectoryObservation,
-  setStatusRefectory } from '../../actions/reportActions';
+  setStatusRefectory,
+} from '../../actions/reportActions';
 
 const mapStateToProps = state => ({
   report: state.report.refectory,
@@ -18,7 +19,6 @@ const mapDispatchToProps = dispatch => ({
   setStatusRefectory: statusRefectory => dispatch(setStatusRefectory(statusRefectory)),
 });
 
-const RefectoryCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(RefectoryCheckoutScreen);
+const RefectoryCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(RefectoryCheckoutScreen);
 
 export default RefectoryCheckoutContainer;

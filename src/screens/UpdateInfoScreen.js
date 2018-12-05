@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import {
-  StyleSheet,
   TouchableOpacity,
   Text,
   View,
@@ -12,14 +11,16 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import {
-  TITULAR_COUNSELOR,
-  SURROGATE_COUNSELOR,
+  EDIT_SUCCEED,
+} from '../constants/toastMessages';
+import {
   EXECUTIVE_POWER,
   EDUCATION_WORKERS,
   STUDENT_PARENTS,
   CIVILIAN_ENTITIES,
-  EDIT_SUCCEED,
-} from '../constants/generalConstants';
+  TITULAR_COUNSELOR,
+  SURROGATE_COUNSELOR,
+} from '../constants/counselorConstants';
 import Header from '../components/Header';
 import { logInfo } from '../../logConfig/loggers';
 import DropdownComponent from '../components/DropdownComponent';
@@ -27,68 +28,11 @@ import NameField from '../components/NameField';
 import PhoneField from '../components/PhoneField';
 import ShowToast from '../components/Toast';
 import { EDIT_ACCOUNT_ERROR, EDIT_PROFILE_ERROR } from '../constants/errorConstants';
-import treatingEditCounselorError from '../ErrorTreatment';
+import editConselorErrorHandler from '../customErrorTreatments/userProfileInLoginError';
 import { backHandlerPop } from '../NavigationFunctions';
+import styles from '../Styles/UpdateInfoScreenStyles';
 
 const FILE_NAME = 'UpdateInfoScreen.js';
-
-const styles = StyleSheet.create({
-  principal: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-
-  content: {
-    flex: 6,
-    marginTop: 8,
-    paddingHorizontal: 15,
-  },
-
-  buttonContainer: {
-    paddingVertical: 10,
-    borderWidth: 1,
-    borderRadius: 7,
-    marginHorizontal: 15,
-    marginTop: 30,
-    marginBottom: 20,
-    backgroundColor: '#FF9500',
-    justifyContent: 'flex-end',
-  },
-
-  buttonText: {
-    textAlign: 'center',
-    color: '#FFF',
-  },
-
-  InputFieldStyle: {
-    padding: 8,
-    marginTop: 1,
-    backgroundColor: '#FAFAFA',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    borderRadius: 7,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-  },
-
-  InputFieldDropdown: {
-    marginTop: 1,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 7,
-    marginBottom: 10,
-  },
-
-  icon: {
-    margin: 5,
-  },
-
-  InputStyle: {
-    flex: 1,
-  },
-});
 
 export default class UpdateInfoScreen extends React.Component {
   constructor(props) {
@@ -154,10 +98,10 @@ export default class UpdateInfoScreen extends React.Component {
         const errorJson = JSON.parse(error.message);
         switch (errorJson.name) {
           case EDIT_ACCOUNT_ERROR:
-            treatingEditCounselorError(errorJson.status);
+            editConselorErrorHandler(errorJson.status);
             break;
           case EDIT_PROFILE_ERROR:
-            treatingEditCounselorError(errorJson.status);
+            editConselorErrorHandler(errorJson.status);
             break;
           default:
             break;
@@ -215,15 +159,13 @@ export default class UpdateInfoScreen extends React.Component {
               <Text>Telefone</Text>
               <PhoneField
                 value={this.state.phone}
-                callback={validPhone =>
-                  this.setState({ phone: validPhone })}
+                callback={validPhone => this.setState({ phone: validPhone })}
               />
 
               <Text>Tipo de Conselheiro</Text>
               <DropdownComponent
                 selectedValue={this.state.counselorType}
-                callback={counselorTypeChecked =>
-                  this.setState({ counselorType: counselorTypeChecked })}
+                callback={counselorTypeChecked => this.setState({ counselorType: counselorTypeChecked })}
                 pickerTitle={[
                   <Picker.Item value="" label="Escolha seu cargo" color="#95a5a6" />,
                 ]}
@@ -264,7 +206,7 @@ export default class UpdateInfoScreen extends React.Component {
 
       <View style={styles.principal}>
         <Header
-          title={'Editar Informações'}
+          title="Editar Informações"
         />
 
         {activityIndicatorOrScreen}
@@ -274,7 +216,9 @@ export default class UpdateInfoScreen extends React.Component {
   }
 }
 
-const { shape, string, number, bool } = PropTypes;
+const {
+  shape, string, number, bool,
+} = PropTypes;
 
 UpdateInfoScreen.propTypes = {
   asyncEditCounselor: PropTypes.func.isRequired,

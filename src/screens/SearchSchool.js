@@ -3,7 +3,6 @@ import { Actions } from 'react-native-router-flux';
 import axios from 'axios';
 import React from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
@@ -24,100 +23,17 @@ import ShowToast from '../components/Toast';
 import SchoolListButton from '../components/SchoolListButton';
 import brazilianStates from '../constants/brazilianStates';
 import municipalDistricts from '../constants/municipalDistricts';
-
+import {
+  SCHOOL_NOT_FOUND,
+  ERROR_FIND_SCHOOL,
+} from '../constants/toastMessages';
 import {
   SCHOOL_ENDPOINT,
-  SCHOOL_NOT_FOUND,
-  ERROR_FIND_SCHOOL } from '../constants/generalConstants';
+} from '../constants/linkConstants';
 import { backHandlerPopToMain } from '../NavigationFunctions';
-
+import styles from '../Styles/SearchSchoolStyles';
 
 const FILE_NAME = 'SearchSchool.js';
-
-const styles = StyleSheet.create({
-  searchSchoolScreen: {
-    flex: 1,
-    backgroundColor: 'white',
-  },
-
-  bodyBox: {
-    flex: 10,
-    alignItems: 'center',
-  },
-  content: {
-    flex: 6,
-    marginTop: 8,
-  },
-
-  icon: {
-    margin: 8,
-  },
-
-  buttonSearchAnabled: {
-    paddingHorizontal: 117,
-    paddingVertical: 15,
-    marginTop: 50,
-    marginBottom: 0,
-    backgroundColor: '#FF9500',
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-
-  buttonSearchDisabled: {
-    paddingHorizontal: 117,
-    paddingVertical: 15,
-    marginTop: 50,
-    marginBottom: 0,
-    backgroundColor: '#DEDEDE',
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-
-  listSchools: {
-    justifyContent: 'center',
-    marginHorizontal: 5,
-    marginTop: 60,
-    borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 7,
-    height: 400,
-  },
-
-  item: {
-    flex: 1,
-    width: null,
-    borderBottomColor: 'black',
-    borderBottomWidth: 0.5,
-    borderRadius: 7,
-  },
-
-  buttonArea: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingBottom: 20,
-  },
-
-  InputDropdown: {
-    marginTop: 15,
-    paddingLeft: 2,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 7,
-
-  },
-
-  Input: {
-    marginTop: 20,
-    paddingLeft: 2,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: 'gray',
-    backgroundColor: '#FAFAFA',
-    borderWidth: 1,
-    borderRadius: 7,
-  },
-});
 
 console.disableYellowBox = true;
 
@@ -249,8 +165,8 @@ class SearchSchool extends React.Component {
   }
 
   buttonActivation() {
-    if ((this.state.name > '' && this.state.uf > '') ||
-    ((this.state.city !== 'Brasília' && this.state.city > '') && this.state.uf > '')) {
+    if ((this.state.name > '' && this.state.uf > '')
+    || ((this.state.city !== 'Brasília' && this.state.city > '') && this.state.uf > '')) {
       if (this.state.isLoading) {
         return (
           <ActivityIndicator
@@ -300,8 +216,7 @@ class SearchSchool extends React.Component {
           selectedValue={this.state.city}
         >
           <Picker.Item value="" label="Escolha o Municipio" color="#95a5a6" />
-          {municipalDistricts[UfInitials].cidades.map(item =>
-            (<Picker.Item label={item} value={item} key={item} color="#000000" />))}
+          {municipalDistricts[UfInitials].cidades.map(item => (<Picker.Item label={item} value={item} key={item} color="#000000" />))}
         </Picker>
       </View>
     ) : null;
@@ -310,7 +225,7 @@ class SearchSchool extends React.Component {
 
       <View style={styles.searchSchoolScreen}>
         <Header
-          title={'Pesquisar Escola'}
+          title="Pesquisar Escola"
           onPress={() => Actions.popTo('mainScreen')}
         />
         <KeyboardAvoidingView style={styles.content} behavior="padding">
@@ -328,14 +243,13 @@ class SearchSchool extends React.Component {
                 >
                   <Picker
                     onValueChange={uf => (
-                      uf === 'DF - Distrito Federal' ?
-                        this.setState({
+                      uf === 'DF - Distrito Federal'
+                        ? this.setState({
                           ...this.state,
                           uf,
                           city: 'Brasília',
                         })
-                        :
-                        this.setState({
+                        : this.setState({
                           ...this.state,
                           uf,
                           city: '',
@@ -360,7 +274,7 @@ class SearchSchool extends React.Component {
                     width={280}
                     returnKeyType="go"
                     maxLength={50}
-                    keyboardType={'default'}
+                    keyboardType="default"
                     onChangeText={text => this.validateName(text)}
                     value={this.state.name}
                     underlineColorAndroid="transparent"
@@ -372,7 +286,7 @@ class SearchSchool extends React.Component {
 
               {this.showFlatList()}
 
-              <View key="renderButton" style={styles.buttonArea} >
+              <View key="renderButton" style={styles.buttonArea}>
                 {this.buttonActivation()}
               </View>
             </View>
@@ -383,7 +297,9 @@ class SearchSchool extends React.Component {
   }
 }
 
-const { shape, string, number, bool, func } = PropTypes;
+const {
+  shape, string, number, bool, func,
+} = PropTypes;
 
 SearchSchool.propTypes = {
   setSchoolInfo: func.isRequired,

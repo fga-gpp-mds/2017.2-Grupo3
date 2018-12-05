@@ -4,7 +4,7 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as actions from '../../src/actions/schedulingVisitActions';
 import * as types from '../../src/actions/types';
-import { POSTS_LINK_NUVEM_CIVICA } from '../../src/constants/generalConstants';
+import { POSTS_LINK_NUVEM_CIVICA } from '../../src/constants/linkConstants';
 import * as mockActions from '../../src/actions/ManagerRegisterActions';
 import {
   GET_CURRENT_SCHEDULE_ERROR,

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import DocCheckoutScreen from '../../screens/reports/DocCheckoutScreen';
-import { setDocReportPositive,
+import {
+  setDocReportPositive,
   setDocReportNegative,
   setDocObservation,
   setStatusDoc,
@@ -18,7 +19,6 @@ const mapDispatchToProps = dispatch => ({
   setStatusDoc: statusDoc => dispatch(setStatusDoc(statusDoc)),
 });
 
-const DocCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(DocCheckoutScreen);
+const DocCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(DocCheckoutScreen);
 
 export default DocCheckoutContainer;

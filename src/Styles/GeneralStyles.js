@@ -85,7 +85,6 @@ const styles = {
     borderRadius: 7,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: 'gray',
   },
   InputFieldDropdown: {
     marginTop: 1,
@@ -174,6 +173,19 @@ const styles = {
       marginTop: 5,
       marginHorizontal: 10,
     },
+  },
+
+  inputFieldErrorStyle: {
+    flex: 1,
+    borderColor: 'red',
+  },
+
+  inputFieldValidStyle: {
+    borderColor: 'green',
+  },
+
+  textMessageError: {
+    color: 'red',
   },
 };
 

@@ -8,10 +8,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setReportObservation: observation => dispatch(setReportObservation(observation)),
-  setStatusReportObservation: statusReportObservation =>
-    dispatch(setStatusReportObservation(statusReportObservation)),
+  setStatusReportObservation: statusReportObservation => dispatch(setStatusReportObservation(statusReportObservation)),
 });
 
-const ReportObservationContainer =
-connect(mapStateToProps, mapDispatchToProps)(ReportObservationScreen);
+const ReportObservationContainer = connect(mapStateToProps, mapDispatchToProps)(ReportObservationScreen);
 export default ReportObservationContainer;

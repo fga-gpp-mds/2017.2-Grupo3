@@ -3,10 +3,9 @@ Ajudas são sempre bem vindas!
 <p align = "justify">Caso queira contribuir com o projeto, comece lendo o <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais#instalação">README</a>, para conhecer um pouco da nossa proposta e para ter um guia básico de como baixar e configurar o ambiente para rodar o projeto. Também é importante ler nosso <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais/blob/master/CODE_OF_CONDUCT.md">Código de Conduta</a>. Caso tenha mais dúvidas sobre a configuração de ambiente você pode acessar o <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais/wiki/Configura%C3%A7%C3%A3o-do-Ambiente">Documento de Configuração do Ambiente</a>. </p>  
 <p align = "justify">Para mais informações sobre os aspectos gerais do projeto, acesse a <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais/wiki">Wiki</a> e vá navegando pelos documentos que aparecem na <i>Sidebar</i>.</p>
 
+-------------------------
 
-------------------------- 
-
-### Enconcontrou um Bug?
+### Encontrou um Bug?
 * <p align = "justify">Procure se esse bug já não é conhecido e se encontra em uma das nossas <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais/issues">Issues</a>. Os bugs devem estar marcados com <i>tag (label)</i> <b>bug</b>.</p>
 * <p align = "justify">Caso o bug encontrado ainda não esteja em uma das nossas <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais/issues">Issues</a>, basta criar uma <a href="https://github.com/fga-gpp-mds/2017.2-MerendaMais/issues/new">nova Issue</a>. Sempre coloque um título significativo e uma breve descrição do problema, e, caso seja possível, anexar outras informações relevantes sobre o bug, como trechos de código, execução de um caso de teste, imagens, entre outros.</p>
 
@@ -39,3 +38,4 @@ Ajudas são sempre bem vindas!
 </ul>
 <p align = "justify">Essas foram apenas algumas dicas para que seja possível trabalhar cooperativamente a fim de evoluir o projeto. Além dessas, é importante sempre colocar em prática as boas práticas da comunidade, aplicando e disceminando seus conhecimentos, além de estar sempre aprendendo com o conhecimento das outras pessoas.</p>
 <p align = "justify">Obrigado por contribuir! Com certeza sua ajuda será importante!</p>
+

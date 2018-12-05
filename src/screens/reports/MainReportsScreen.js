@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  StyleSheet,
   TouchableOpacity,
   Text,
   View,
   ScrollView,
-  Dimensions,
   BackHandler,
   Alert,
 } from 'react-native';
@@ -16,14 +14,15 @@ import { Actions } from 'react-native-router-flux';
 import { logInfo, logWarn } from '../../../logConfig/loggers';
 import ShowToast from '../../components/Toast';
 import {
-  POSTS_LINK_NUVEM_CIVICA,
-  APP_IDENTIFIER,
-  INSPECTION_POSTING_TYPE_CODE,
+  INTERNAL_ERROR,
+  INSPECTION_SUCCEED,
+} from '../../constants/toastMessages';
+import {
   FINISH_INSPECTION,
   LEAVING_INSPECTION,
   INPECTION_ERROR,
-  INTERNAL_ERROR,
-  INSPECTION_SUCCEED,
+} from '../../constants/alertTitlesMessages';
+import {
   UNAUDITED,
   YES,
   NO,
@@ -37,7 +36,14 @@ import {
   KITCHEN,
   FOOD_PREPARATION,
   OTHER_OBSERVATION,
-} from '../../constants/generalConstants';
+} from '../../constants/counselorConstants';
+import {
+  POSTS_LINK_NUVEM_CIVICA,
+} from '../../constants/linkConstants';
+import {
+  APP_IDENTIFIER,
+  INSPECTION_POSTING_TYPE_CODE,
+} from '../../constants/codeNumbers';
 import {
   GET_CURRENT_SCHEDULE_ERROR,
   AFTER_INPECTION_POST_ERROR,
@@ -48,53 +54,9 @@ import { convertingJSONToString } from '../../actions/counselorActions';
 import { errorGenerator } from '../../actions/schedulingVisitActions';
 import Header from '../../components/Header';
 import ButtonWithActivityIndicator from '../../components/ButtonWithActivityIndicator';
-
-const { width } = Dimensions.get('window');
+import styles from '../../Styles/MainReportsScreenStyles';
 
 const FILE_NAME = 'MainReportsScreen.js';
-
-const styles = StyleSheet.create({
-
-  buttonContainer: {
-    paddingVertical: 15,
-    borderWidth: 1,
-    borderRadius: 7,
-    marginHorizontal: 15,
-    marginVertical: 13,
-    backgroundColor: '#FF9500',
-    justifyContent: 'flex-end',
-  },
-
-  buttonText: {
-    textAlign: 'center',
-    color: '#FFF',
-  },
-
-  content: {
-    backgroundColor: 'white',
-    flex: 1,
-  },
-
-  text: {
-    flex: 1,
-    width: width * 0.7,
-    paddingLeft: 10,
-    color: 'blue',
-    fontSize: 20,
-  },
-
-  statusView: {
-    flexDirection: 'row',
-    paddingVertical: 20,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  loading: {
-    marginTop: 15,
-    marginBottom: 25,
-  },
-});
 
 // Component to each clickable text that goes to checklists.
 const GoToChecklistClickableText = props => (
@@ -139,7 +101,7 @@ const getResponseOfQuestion = (item) => {
   if (item.status) {
     if (item.markedYes) {
       return YES;
-    } else if (item.markedNo) {
+    } if (item.markedNo) {
       return NO;
     }
   }
@@ -155,7 +117,8 @@ const mountDefaultJsonOfInspectionResult = (
   defaultNameOfVerificationList,
   defaultChecklist,
   defaultTextObservation,
-  defaultConcludedStatus) => {
+  defaultConcludedStatus,
+) => {
   const defaultContentJSON = {
     nameOfVerificationList: defaultNameOfVerificationList,
     binaryQuestions: {},
@@ -164,11 +127,10 @@ const mountDefaultJsonOfInspectionResult = (
   };
 
   defaultChecklist.forEach((item) => {
-    defaultContentJSON.binaryQuestions[item.question] =
-      {
-        question: item.question,
-        answer: getResponseOfQuestion(item),
-      };
+    defaultContentJSON.binaryQuestions[item.question] = {
+      question: item.question,
+      answer: getResponseOfQuestion(item),
+    };
   });
 
   return defaultContentJSON;
@@ -222,8 +184,7 @@ export default class MainReportsScreen extends React.Component {
         allContentsResponse.push(
           axios.post(`${POSTS_LINK_NUVEM_CIVICA}/${codPostagem}/conteudos`,
             bodyToInspectionContent,
-            headerToInspectionContent,
-          ),
+            headerToInspectionContent),
         );
       }
 
@@ -245,49 +206,45 @@ export default class MainReportsScreen extends React.Component {
     const contentsListOfInspectionResults = [];
 
     // Used to mount the JSON result to school surroundings inspection.
-    const resultOfSchoolSurroundingsInspection =
-      mountDefaultJsonOfInspectionResult(
-        SCHOOL_SURROUNDINGS,
-        this.props.report.schoolSurroundings,
-        this.props.report.schoolSurroundingsObservation,
-        this.props.report.statusSchoolSurroundings,
-      );
+    const resultOfSchoolSurroundingsInspection = mountDefaultJsonOfInspectionResult(
+      SCHOOL_SURROUNDINGS,
+      this.props.report.schoolSurroundings,
+      this.props.report.schoolSurroundingsObservation,
+      this.props.report.statusSchoolSurroundings,
+    );
 
     // Put the school surroundings JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfSchoolSurroundingsInspection);
 
     // Used to mount the JSON result to Food Stock inspection.
-    const resultOfFoodStock =
-      mountDefaultJsonOfInspectionResult(
-        FOOD_STOCK,
-        this.props.report.foodStock,
-        this.props.report.foodStockObservation,
-        this.props.report.statusFoodStock,
-      );
+    const resultOfFoodStock = mountDefaultJsonOfInspectionResult(
+      FOOD_STOCK,
+      this.props.report.foodStock,
+      this.props.report.foodStockObservation,
+      this.props.report.statusFoodStock,
+    );
 
     // Put the Food Stock JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfFoodStock);
 
     // Used to mount the JSON result to Documentation inspection.
-    const resultOfDocumentation =
-      mountDefaultJsonOfInspectionResult(
-        DOCUMENTATION,
-        this.props.report.doc,
-        this.props.report.docObservation,
-        this.props.report.statusDoc,
-      );
+    const resultOfDocumentation = mountDefaultJsonOfInspectionResult(
+      DOCUMENTATION,
+      this.props.report.doc,
+      this.props.report.docObservation,
+      this.props.report.statusDoc,
+    );
 
     // Put the Documentation JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfDocumentation);
 
     // Used to mount the JSON result to Food Quality inspection.
-    const resultOfFoodQuality =
-      mountDefaultJsonOfInspectionResult(
-        FOOD_QUALITY,
-        this.props.report.foodQuality,
-        this.props.report.foodQualityObservation,
-        this.props.report.statusFoodQuality,
-      );
+    const resultOfFoodQuality = mountDefaultJsonOfInspectionResult(
+      FOOD_QUALITY,
+      this.props.report.foodQuality,
+      this.props.report.foodQualityObservation,
+      this.props.report.statusFoodQuality,
+    );
 
     // Adding additional information in this inspection result that isn't in a default form.
     resultOfFoodQuality.additionalData = {
@@ -299,61 +256,56 @@ export default class MainReportsScreen extends React.Component {
     contentsListOfInspectionResults.push(resultOfFoodQuality);
 
     // Used to mount the JSON result to Food Handler inspection.
-    const resultOfFoodHandler =
-      mountDefaultJsonOfInspectionResult(
-        FOOD_HANDLER,
-        this.props.report.foodHandler,
-        this.props.report.foodHandlerObservation,
-        this.props.report.statusFoodHandler,
-      );
+    const resultOfFoodHandler = mountDefaultJsonOfInspectionResult(
+      FOOD_HANDLER,
+      this.props.report.foodHandler,
+      this.props.report.foodHandlerObservation,
+      this.props.report.statusFoodHandler,
+    );
 
     // Put the Food Handler JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfFoodHandler);
 
     // Used to mount the JSON result to refectory inspection.
-    const resultOfRefectory =
-      mountDefaultJsonOfInspectionResult(
-        REFECTORY,
-        this.props.report.refectory,
-        this.props.report.refectoryObservation,
-        this.props.report.statusRefectory,
-      );
+    const resultOfRefectory = mountDefaultJsonOfInspectionResult(
+      REFECTORY,
+      this.props.report.refectory,
+      this.props.report.refectoryObservation,
+      this.props.report.statusRefectory,
+    );
 
     // Put the refectory JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfRefectory);
 
     // Used to mount the JSON result to water Sewer Supply inspection.
-    const resultOfWaterSewerSupply =
-      mountDefaultJsonOfInspectionResult(
-        WATER_SEWER_SUPPLY,
-        this.props.report.waterSewerSupply,
-        this.props.report.waterSewerSupplyObservation,
-        this.props.report.statuSwaterSewerSupply,
-      );
+    const resultOfWaterSewerSupply = mountDefaultJsonOfInspectionResult(
+      WATER_SEWER_SUPPLY,
+      this.props.report.waterSewerSupply,
+      this.props.report.waterSewerSupplyObservation,
+      this.props.report.statuSwaterSewerSupply,
+    );
 
     // Put the water Sewer Supply JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfWaterSewerSupply);
 
     // Used to mount the JSON result to kitchen inspection.
-    const resultOfKitchen =
-      mountDefaultJsonOfInspectionResult(
-        KITCHEN,
-        this.props.report.kitchen,
-        this.props.report.kitchenObservation,
-        this.props.report.statusKitchen,
-      );
+    const resultOfKitchen = mountDefaultJsonOfInspectionResult(
+      KITCHEN,
+      this.props.report.kitchen,
+      this.props.report.kitchenObservation,
+      this.props.report.statusKitchen,
+    );
 
     // Put the kitchen JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfKitchen);
 
     // Used to mount the JSON result to food Preparation inspection.
-    const resultOfFoodPreparation =
-      mountDefaultJsonOfInspectionResult(
-        FOOD_PREPARATION,
-        this.props.report.foodPreparation,
-        this.props.report.foodPreparationObservation,
-        this.props.report.statusFoodPreparation,
-      );
+    const resultOfFoodPreparation = mountDefaultJsonOfInspectionResult(
+      FOOD_PREPARATION,
+      this.props.report.foodPreparation,
+      this.props.report.foodPreparationObservation,
+      this.props.report.statusFoodPreparation,
+    );
 
     // Put the food Preparation JSON result in the contents array that will be send to Nuvem.
     contentsListOfInspectionResults.push(resultOfFoodPreparation);
@@ -515,11 +467,11 @@ export default class MainReportsScreen extends React.Component {
     return (
       <View style={styles.content}>
         <Header
-          title={'Listas de verificação'}
+          title="Listas de verificação"
           onPress={() => backNavigation()}
         />
         <ScrollView>
-          <View pointerEvents={this.props.clickableView} >
+          <View pointerEvents={this.props.clickableView}>
             <GoToChecklistClickableText
               goToChecklistKey={SCHOOL_SURROUNDINGS}
               goToChecklistText={SCHOOL_SURROUNDINGS}
@@ -627,7 +579,9 @@ export default class MainReportsScreen extends React.Component {
   }
 }
 
-const { shape, string, number, bool, func } = PropTypes;
+const {
+  shape, string, number, bool, func,
+} = PropTypes;
 
 MainReportsScreen.propTypes = {
   isLoading: bool.isRequired,

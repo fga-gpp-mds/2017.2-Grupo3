@@ -1,6 +1,6 @@
 import { logWarn } from '../../logConfig/loggers';
 import ShowToast from '../components/Toast';
-import { INTERNAL_ERROR } from '../constants/generalConstants';
+import { INTERNAL_ERROR } from '../constants/toastMessages';
 
 const FILE_NAME = 'schedulingVisitActions.js';
 

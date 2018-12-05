@@ -83,7 +83,9 @@ export const getCounselorData = async (counselorsInformationWithNuvemCode) => {
     promisesCompleteCounselors.push(
       getCounselorProfile(
         counselorsInformationWithNuvemCode[i][0],
-        counselorsInformationWithNuvemCode[i][1]));
+        counselorsInformationWithNuvemCode[i][1],
+      ),
+    );
   }
   return Promise.all(promisesCompleteCounselors);
 };

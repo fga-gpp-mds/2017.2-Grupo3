@@ -20,7 +20,7 @@ import {
   SECTIONS,
 } from '../constants/reportPDF';
 import replaceDiacritics from '../services/replaceDiacritics';
-import { LOADING_RESULT } from '../constants/generalConstants';
+import { LOADING_RESULT } from '../constants/toastMessages';
 
 
 const buttonBoxStyle = StyleSheet.create({
@@ -68,13 +68,13 @@ export default class PDFReport extends Component {
       body += this.generateTable(key);
       body += this.generateObservation(key);
       if (key === 'foodQuality') {
-        if (this.props.reportResult[key].additionalData.acceptedMenu !== '' &&
-          this.props.reportResult[key].additionalData.acceptedMenu !== undefined) {
+        if (this.props.reportResult[key].additionalData.acceptedMenu !== ''
+          && this.props.reportResult[key].additionalData.acceptedMenu !== undefined) {
           body += '<h4>Menu Aceito<h4>';
           body += `<p align="justify">
           ${this.props.reportResult[key].additionalData.acceptedMenu}</p>`;
-        } else if (this.props.reportResult[key].additionalData.refusedMenu !== '' &&
-          this.props.reportResult[key].additionalData.refusedMenu !== undefined) {
+        } else if (this.props.reportResult[key].additionalData.refusedMenu !== ''
+          && this.props.reportResult[key].additionalData.refusedMenu !== undefined) {
           body += '<h4>Menu Recusado<h4>';
           body += `<p align="justify">
           ${this.props.reportResult[key].additionalData.refusedMenu}</p>`;
@@ -92,8 +92,8 @@ export default class PDFReport extends Component {
 
   generateObservation(key) {
     let observation = '';
-    if (this.props.reportResult[key].textObservation !== '' &&
-      this.props.reportResult[key].textObservation !== undefined) {
+    if (this.props.reportResult[key].textObservation !== ''
+      && this.props.reportResult[key].textObservation !== undefined) {
       observation += '<h4>Observacoes:</h4><br>';
       observation += `<div text-align="justify"> 
         ${this.props.reportResult[key].textObservation} 
@@ -140,8 +140,8 @@ export default class PDFReport extends Component {
     await this.getData();
     const doc = await this.createDocument();
 
-    const nameFile = this.props.visitSchedule.content.date +
-      replaceDiacritics(this.props.visitSchedule.content.schoolName);
+    const nameFile = this.props.visitSchedule.content.date
+      + replaceDiacritics(this.props.visitSchedule.content.schoolName);
 
     const options = {
       html: doc,

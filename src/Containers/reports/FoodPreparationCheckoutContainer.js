@@ -4,7 +4,8 @@ import {
   setFoodPreparationReportPositive,
   setFoodPreparationReportNegative,
   setFoodPreparationObservation,
-  setStatusFoodPreparation } from '../../actions/reportActions';
+  setStatusFoodPreparation,
+} from '../../actions/reportActions';
 
 const mapStateToProps = state => ({
   report: state.report.foodPreparation,
@@ -14,13 +15,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setFoodPreparationReportPositive: key => dispatch(setFoodPreparationReportPositive(key)),
   setFoodPreparationReportNegative: key => dispatch(setFoodPreparationReportNegative(key)),
-  setFoodPreparationObservation: observation =>
-    dispatch(setFoodPreparationObservation(observation)),
-  setStatusFoodPreparation: statusFoodPreparation =>
-    dispatch(setStatusFoodPreparation(statusFoodPreparation)),
+  setFoodPreparationObservation: observation => dispatch(setFoodPreparationObservation(observation)),
+  setStatusFoodPreparation: statusFoodPreparation => dispatch(setStatusFoodPreparation(statusFoodPreparation)),
 });
 
-const FoodPreparationCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(FoodPreparationCheckoutScreen);
+const FoodPreparationCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(FoodPreparationCheckoutScreen);
 
 export default FoodPreparationCheckoutContainer;

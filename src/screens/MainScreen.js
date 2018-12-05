@@ -1,52 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-const styles = StyleSheet.create({
-  headerBox: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: '#FF9500',
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  bodyBox: {
-    flex: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  textLogo: {
-    flex: 1,
-    paddingLeft: 48,
-    fontSize: 30,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  buttonInspect: {
-    paddingHorizontal: 50,
-    paddingVertical: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FF9500',
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-});
-
+import styles from '../Styles/MainScreenStyles';
 
 class MainScreen extends React.Component {
   componentWillMount() {
     this.props.resetStore('list', 'report', 'school');
   }
+
   render() {
     return (
       <View style={{ flex: 1, backgroundColor: 'white' }}>

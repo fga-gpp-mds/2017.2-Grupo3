@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { BoldText } from './BoldText';
 
 const styles = StyleSheet.create({
   listRegisters: {
@@ -34,19 +35,21 @@ const SchoolData = school => (
 
   <View style={styles.listRegisters}>
     <View style={styles.textBox}>
-      <Text style={styles.title}>ESCOLA SELECIONADA</Text>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>Nome da escola: </Text>
-        {school.schoolName}
+      <Text style={styles.title}>
+        ESCOLA SELECIONADA
       </Text>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>Email: </Text>
-        {school.schoolEmail}
-      </Text>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>Telefone: </Text>
-        {school.schoolPhone}
-      </Text>
+      <BoldText
+        data={school.schoolName}
+        label="Nome da escola: "
+      />
+      <BoldText
+        data={school.schoolEmail}
+        label="Email: "
+      />
+      <BoldText
+        data={school.schoolPhone}
+        label="Telefone: "
+      />
     </View>
   </View>
 );

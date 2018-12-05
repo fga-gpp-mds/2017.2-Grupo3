@@ -2,7 +2,8 @@ import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 import * as actions from '../../src/actions/schedulingMeetingActions';
 import * as types from '../../src/actions/types';
-import { POSTS_LINK_NUVEM_CIVICA, MEETING_POSTING_TYPE_CODE } from '../../src/constants/generalConstants';
+import { POSTS_LINK_NUVEM_CIVICA } from '../../src/constants/linkConstants';
+import { MEETING_POSTING_TYPE_CODE } from '../../src/constants/codeNumbers';
 
 
 const LATITUDE = 0.9;

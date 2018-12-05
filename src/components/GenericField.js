@@ -56,7 +56,11 @@ export default class GenericField extends Component {
   render() {
     return (
       <View>
-        <Text> {this.props.header.toUpperCase()} </Text>
+        <Text>
+          {' '}
+          {this.props.header.toUpperCase()}
+          {' '}
+        </Text>
         <TextInput
           style={this.state.styleInUse}
           placeholder={this.props.message}

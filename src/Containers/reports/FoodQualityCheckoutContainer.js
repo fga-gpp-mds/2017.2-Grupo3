@@ -6,7 +6,8 @@ import {
   setAcceptedMenu,
   setRefusedMenu,
   setFoodQualityObservation,
-  setStatusFoodQuality } from '../../actions/reportActions';
+  setStatusFoodQuality,
+} from '../../actions/reportActions';
 
 const mapStateToProps = state => ({
   report: state.report.foodQuality,
@@ -24,7 +25,6 @@ const mapDispatchToProps = dispatch => ({
   setStatusFoodQuality: statusFoodQuality => dispatch(setStatusFoodQuality(statusFoodQuality)),
 });
 
-const FoodQualityCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(FoodQualityCheckoutScreen);
+const FoodQualityCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(FoodQualityCheckoutScreen);
 
 export default FoodQualityCheckoutContainer;

@@ -4,7 +4,8 @@ import {
   setSchoolSurroundingsReportPositive,
   setSchoolSurroundingsReportNegative,
   setSchoolSurroundingsObservation,
-  setStatusSchoolSurroundings } from '../../actions/reportActions';
+  setStatusSchoolSurroundings,
+} from '../../actions/reportActions';
 
 const mapStateToProps = state => ({
   report: state.report.schoolSurroundings,
@@ -14,12 +15,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setSchoolSurroundingsReportPositive: key => dispatch(setSchoolSurroundingsReportPositive(key)),
   setSchoolSurroundingsReportNegative: key => dispatch(setSchoolSurroundingsReportNegative(key)),
-  setSchoolSurroundingsObservation: observation =>
-    dispatch(setSchoolSurroundingsObservation(observation)),
-  setStatusSchoolSurroundings: statusSchoolSurroundings =>
-    dispatch(setStatusSchoolSurroundings(statusSchoolSurroundings)),
+  setSchoolSurroundingsObservation: observation => dispatch(setSchoolSurroundingsObservation(observation)),
+  setStatusSchoolSurroundings: statusSchoolSurroundings => dispatch(setStatusSchoolSurroundings(statusSchoolSurroundings)),
 });
 
-const SchoolSurroundingsCheckoutContainer =
-connect(mapStateToProps, mapDispatchToProps)(SchoolSurroundingsCheckoutScreen);
+const SchoolSurroundingsCheckoutContainer = connect(mapStateToProps, mapDispatchToProps)(SchoolSurroundingsCheckoutScreen);
 export default SchoolSurroundingsCheckoutContainer;
